@@ -19,7 +19,9 @@ const Sidenav = forwardRef((props, ref) => {
     if (innerRef.current) {
       innerRef.current.addEventListener('click', handleClick);
     }
-
+if(Cookies.get('lastWatchedAnime') !== undefined){
+      setAnimeId(Cookies.get('lastWatchedAnime'))
+    }
     // Cleanup function
     return () => {
       if (innerRef.current) {
