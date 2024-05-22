@@ -1,4 +1,4 @@
-import React ,{useState,useEffect,useRef} from 'react'
+import React ,{forwardRef,useState,useEffect,useRef} from 'react'
 import { Link, useParams } from 'react-router-dom';
 import Plyr from 'plyr';
 import axios from 'axios'
@@ -8,7 +8,7 @@ import Cookies from 'js-cookie';
 
 const pageSize = 10; // Number of items per page
 
-function Watch() {
+const Watch = forwardRef((props, ref) => {
     Cookies.set('lastWatchedAnime', animeId);
 
   let { animeId } = useParams();
@@ -334,7 +334,7 @@ function Watch() {
   return (
     <>
 
-    <Nav spinner={spinnerTrue}/>
+    <Nav pp={props.hj} forwardedRef={ref} spinner={spinnerTrue}/>
    {visible && <div style={{ display:'felx',position:'relative',justifyContent:'space-between', backgroundColor:'rgb(51, 50, 50)',color:'white', padding:'10px 10px'}} >
       <i className="fa-solid fa-hand-holding-dollar"></i> Support
       <span ><a target='_blank' style={{backgroundColor:'black',padding:'0px 10px',color:'white',textDecoration:'none',position:'absolute',right:'20px',marginRight:'10px'}} href='https://ko-fi.com/codercoder61'>Support</a><span 
@@ -380,6 +380,6 @@ function Watch() {
   
     </>
   )
-}
+})
 
 export default Watch
