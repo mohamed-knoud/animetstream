@@ -32,7 +32,7 @@ const plusSlides=(n) =>{
     const fetchData = async () => {
       try {
         const response = await axios.get(`https://consume-mu.vercel.app/meta/anilist/popular?page=1&perPage=20`);
-        console.log(response.data.results)
+        
         setAnimes(response.data.results || []);
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -47,7 +47,7 @@ const plusSlides=(n) =>{
 
   useEffect(() => {
     showSlides(0)
-    console.log(animep)
+    
 
   }, [animep]);
   
