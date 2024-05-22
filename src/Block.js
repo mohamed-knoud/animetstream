@@ -6,7 +6,6 @@ function Block(props) {
   const [data, setData] = useState([]);
   const fetchData = async (url) => {
     await axios.get(url).then(dataa=>{
-      console.log(dataa.data.results)
         setData(dataa.data.results);
 
     }).catch(error=>{
