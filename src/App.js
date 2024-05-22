@@ -39,7 +39,7 @@ function App() {
 
       <Routes>
         <Route exact path='/' element={<Home hj={handleClick} forwardedRef={childRef}/>} />
-        <Route exact path='/Watch/:animeId' element={<Watch />} />
+        <Route exact path='/Watch/:animeId' element={<Watch hj={handleClick} forwardedRef={childRef}/>} />
       </Routes>
       <Footer onclick={handleFalse} formstate={formstate} />
     </div>
