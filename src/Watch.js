@@ -358,7 +358,7 @@ const Watch = forwardRef((props, ref) => {
   
     <div id="eps" style={{marginTop:'20px',display:'flex',flexDirection:'column',flex:'1',alignItems:'center',flexWrap:'wrap',justifyContent:'center'}}>
     <div  style={{marginBottom:'20px'}}>
-        {totalPages>2 ? renderPagination() : ""}
+        {totalPages>1 ? renderPagination() : ""}
       </div>
       <div style={{display:'flex',flexWrap:'wrap',justifyContent:"center"}}>
     {
