@@ -9,9 +9,10 @@ import Cookies from 'js-cookie';
 const pageSize = 10; // Number of items per page
 
 const Watch = forwardRef((props, ref) => {
-    Cookies.set('lastWatchedAnime', animeId);
 
   let { animeId } = useParams();
+        Cookies.set('lastWatchedAnime', animeId);
+
   const [animeid,setAnimeId] = useState(0)
   const defaultOptions = {};
   const [isLoading,setSpinner] = useState(true)
