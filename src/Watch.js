@@ -91,7 +91,7 @@ const Watch = forwardRef((props, ref) => {
         setReleaseDate(data.data.releaseDate)
         setImage(data.data.image)
 
-        console.log(data)
+       
         axios.get(`https://consume-mu.vercel.app/meta/anilist/watch/${data.data.episodes[0].id}`).then(data=>{
 
           
@@ -160,7 +160,6 @@ const Watch = forwardRef((props, ref) => {
         setEpisodes(data.data.episodes)
         settotalEpisodes(data.data.totalEpisodes)
         setCurrentPage(1); // Reset current page when data changes
-        console.log(data.data)
         setImage(data.data.image)
         setSeason(data.data.season)
         setStatus(data.data.status)
@@ -317,7 +316,6 @@ const Watch = forwardRef((props, ref) => {
       }
      
 
-      console.log(totalEpisodes)
       settotalPages(Math.ceil(totalEpisodes / pageSize));
       setStartIndex((currentPage - 1) * pageSize)
       
