@@ -4,10 +4,13 @@ import Plyr from 'plyr';
 import axios from 'axios'
 import './Watch.css';
 import Nav from './Nav'
+import Cookies from 'js-cookie';
 
 const pageSize = 10; // Number of items per page
 
 function Watch() {
+    Cookies.set('lastWatchedAnime', animeId);
+
   let { animeId } = useParams();
   const [animeid,setAnimeId] = useState(0)
   const defaultOptions = {};
