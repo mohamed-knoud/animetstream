@@ -81,7 +81,7 @@ const Watch = forwardRef((props, ref) => {
         setAnimeId(data.data.episodes[0].id)
         setEpisodeNumber(data.data.episodes[0].number)
         setEpisodes(data.data.episodes)
-        settotalEpisodes(data.data.totalEpisodes)
+        settotalEpisodes(data.data.episodes.length)
         setCurrentPage(1); // Reset current page when data changes
         
         setSeason(data.data.season)
