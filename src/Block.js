@@ -41,7 +41,9 @@ function Block(props) {
             data.map((anime, index) => (
                 <Link key={index} style={{textDecoration:'none'}} to={`/Watch/${anime.id}`}><div style={{display:'flex',flexDirection:'column',textAlign:'center'}} >
                 <img src={anime.image} alt={anime.title} />
-                <span>{anime.title.english.length>30?anime.title.english.slice(0,30)+"...":anime.title.english}</span>
+                // <span>{anime.title.english.length>30?anime.title.english.slice(0,30)+"...":anime.title.english}</span>
+                  <span>{anime.title.english}</span>
+
                 </div></Link>
             ))
             }
