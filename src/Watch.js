@@ -76,7 +76,7 @@ const Watch = forwardRef((props, ref) => {
   };
   useEffect(() => {
     const fetchData = async () => {
-      await axios.get(`https://cors-anywhere.herokuapp.com/https://consume-mu.vercel.app/meta/anilist/info/${animeId}`).then(data=>{
+      await axios.get(`https://consume-mu.vercel.app/meta/anilist/info/${animeId}`).then(data=>{
         setTitle(data.data.title.english)
         setAnimeId(data.data.episodes[0].id)
         setEpisodeNumber(data.data.episodes[0].number)
@@ -92,7 +92,7 @@ const Watch = forwardRef((props, ref) => {
         setImage(data.data.image)
 
        
-        axios.get(`https://cors-anywhere.herokuapp.com/https://consume-mu.vercel.app/meta/anilist/watch/${data.data.episodes[0].id}`).then(data=>{
+        axios.get(`https://consume-mu.vercel.app/meta/anilist/watch/${data.data.episodes[0].id}`).then(data=>{
 
           
           if (window.Hls.isSupported()) {
@@ -152,7 +152,7 @@ const Watch = forwardRef((props, ref) => {
        
       }).catch(error=>{
         console.log(error)
-        axios.get(`https://cors-anywhere.herokuapp.com/https://consume-mu.vercel.app/anime/gogoanime/info/${animeId}`).then(data=>{
+        axios.get('https://consume-mu.vercel.app/anime/gogoanime/info/${animeId}`).then(data=>{
         setAnimeId(data.data.id)
         setTitle(data.data.title)
         setAnimeId(data.data.episodes[0].id)
@@ -166,7 +166,7 @@ const Watch = forwardRef((props, ref) => {
         setDuration(data.data.duration)
         setRating(data.data.rating)
         setReleaseDate(data.data.releaseDate)
-        axios.get(`https://cors-anywhere.herokuapp.com/https://consume-mu.vercel.app/anime/gogoanime/watch/${data.data.episodes[0].id}`).then(data=>{
+        axios.get(`https://consume-mu.vercel.app/anime/gogoanime/watch/${data.data.episodes[0].id}`).then(data=>{
           
 
           if (window.Hls.isSupported()) {
@@ -242,7 +242,7 @@ const Watch = forwardRef((props, ref) => {
   useEffect(() => {
     setSpinner(true)
 
-    axios.get(`https://cors-anywhere.herokuapp.com/https://consume-mu.vercel.app/anime/gogoanime/watch/${episodeId}`).then(data=>{
+    axios.get(`https://consume-mu.vercel.app/anime/gogoanime/watch/${episodeId}`).then(data=>{
           
 
           if (window.Hls.isSupported()) {
@@ -334,7 +334,7 @@ const Watch = forwardRef((props, ref) => {
     <>
 
     <Nav pp={props.hj} forwardedRef={ref} spinner={spinnerTrue}/>
-   {visible && <div style={{ display:'felx',position:'relative',justifyContent:'space-between', backgroundColor:'rgb(51, 50, 50)',color:'white', padding:'10px 10px'}} >
+   {visible && <div style={{ display:'flex',position:'relative',justifyContent:'space-between', backgroundColor:'rgb(51, 50, 50)',color:'white', padding:'10px 10px'}} >
       <i className="fa-solid fa-hand-holding-dollar"></i> Support
       <span ><a target='_blank' style={{backgroundColor:'black',padding:'0px 10px',color:'white',textDecoration:'none',position:'absolute',right:'20px',marginRight:'10px'}} href='https://ko-fi.com/codercoder61'>Support</a><span 
   style={{cursor:'pointer',color:'white',position:'absolute',right:'10px',bottom:'8px',fontSize:'20px'}} onClick={handleClick}>X</span></span>
