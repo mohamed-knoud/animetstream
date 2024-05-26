@@ -334,7 +334,7 @@ const Watch = forwardRef((props, ref) => {
     <>
 
     <Nav pp={props.hj} forwardedRef={ref} spinner={spinnerTrue}/>
-   {visible && <div style={{ display:'flex',position:'relative',justifyContent:'space-between', backgroundColor:'rgb(51, 50, 50)',color:'white', padding:'10px 10px'}} >
+   {visible && <div style={{ position:'relative',justifyContent:'space-between', backgroundColor:'rgb(51, 50, 50)',color:'white', padding:'10px 10px'}} >
       <i className="fa-solid fa-hand-holding-dollar"></i> Support
       <span ><a target='_blank' style={{backgroundColor:'black',padding:'0px 10px',color:'white',textDecoration:'none',position:'absolute',right:'20px',marginRight:'10px'}} href='https://ko-fi.com/codercoder61'>Support</a><span 
   style={{cursor:'pointer',color:'white',position:'absolute',right:'10px',bottom:'8px',fontSize:'20px'}} onClick={handleClick}>X</span></span>
