@@ -11,7 +11,7 @@ function Overlay(props) {
 
  
   useEffect(() => {
-    axios.get(`https://cors-anywhere.herokuapp.com/https://consume-mu.vercel.app/anime/gogoanime/${query}`)
+    axios.get(`https://consume-mu.vercel.app/anime/gogoanime/${query}`)
       .then(response => {
         // console.log(response.data.results);
         setAnimes(response.data.results || []) 
