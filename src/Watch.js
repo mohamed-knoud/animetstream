@@ -76,7 +76,7 @@ const Watch = forwardRef((props, ref) => {
   };
   useEffect(() => {
     const fetchData = async () => {
-      await axios.get(`https://sup-proxy.zephex0-f6c.workers.dev/api-json?url=https://consume-mu.vercel.app/meta/anilist/info/${animeId}?api_key=171fe27dbfecc58e2a18fbced644cda9`).then(data=>{
+      await axios.get(`https://consume-mu.vercel.app/meta/anilist/info/${animeId}`).then(data=>{
         setTitle(data.data.title.english)
         setAnimeId(data.data.episodes[0].id)
         setEpisodeNumber(data.data.episodes[0].number)
@@ -92,7 +92,7 @@ const Watch = forwardRef((props, ref) => {
         setImage(data.data.image)
 
        
-        axios.get(`https://sup-proxy.zephex0-f6c.workers.dev/api-json?url=https://consume-mu.vercel.app/meta/anilist/watch/${data.data.episodes[0].id}?api_key=171fe27dbfecc58e2a18fbced644cda9`).then(data=>{
+        axios.get(`https://consume-mu.vercel.app/meta/anilist/watch/${data.data.episodes[0].id}`).then(data=>{
 
           
           if (window.Hls.isSupported()) {
@@ -152,7 +152,7 @@ const Watch = forwardRef((props, ref) => {
        
       }).catch(error=>{
         console.log(error)
-        axios.get(`https://sup-proxy.zephex0-f6c.workers.dev/api-json?url=https://consume-mu.vercel.app/anime/gogoanime/info/${animeId}?api_key=171fe27dbfecc58e2a18fbced644cda9`).then(data=>{
+        axios.get(`https://consume-mu.vercel.app/anime/gogoanime/info/${animeId}`).then(data=>{
         setAnimeId(data.data.id)
         setTitle(data.data.title)
         setAnimeId(data.data.episodes[0].id)
@@ -166,7 +166,7 @@ const Watch = forwardRef((props, ref) => {
         setDuration(data.data.duration)
         setRating(data.data.rating)
         setReleaseDate(data.data.releaseDate)
-        axios.get(`https://sup-proxy.zephex0-f6c.workers.dev/api-json?url=https://consume-mu.vercel.app/anime/gogoanime/watch/${data.data.episodes[0].id}?api_key=171fe27dbfecc58e2a18fbced644cda9`).then(data=>{
+        axios.get(`https://consume-mu.vercel.app/anime/gogoanime/watch/${data.data.episodes[0].id}`).then(data=>{
           
 
           if (window.Hls.isSupported()) {
@@ -242,7 +242,7 @@ const Watch = forwardRef((props, ref) => {
   useEffect(() => {
     setSpinner(true)
 
-    axios.get(`https://sup-proxy.zephex0-f6c.workers.dev/api-json?url=https://consume-mu.vercel.app/anime/gogoanime/watch/${episodeId}?api_key=171fe27dbfecc58e2a18fbced644cda9`).then(data=>{
+    axios.get(`https://consume-mu.vercel.app/anime/gogoanime/watch/${episodeId}`).then(data=>{
           
 
           if (window.Hls.isSupported()) {
