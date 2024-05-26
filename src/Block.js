@@ -16,15 +16,15 @@ function Block(props) {
   };
 
   const handleClick3 = ()=>{
-        fetchData('https://consume-mu.vercel.app/meta/anilist/trending?page=1')
+        fetchData('https://sup-proxy.zephex0-f6c.workers.dev/api-json?url=https://consume-mu.vercel.app/meta/anilist/trending?page=1?api_key=171fe27dbfecc58e2a18fbced644cda9')
   }
   const handleClick4 = ()=>{
-        fetchData('https://consume-mu.vercel.app/meta/anilist/popular?page=1&perPage=20')
+        fetchData('https://sup-proxy.zephex0-f6c.workers.dev/api-json?url=https://consume-mu.vercel.app/meta/anilist/popular?page=1&perPage=20?api_key=171fe27dbfecc58e2a18fbced644cda9')
   }
   useEffect(() => {
 
 
-    fetchData('https://consume-mu.vercel.app/meta/anilist/trending?page=1')
+    fetchData('https://sup-proxy.zephex0-f6c.workers.dev/api-json?url=https://consume-mu.vercel.app/meta/anilist/trending?page=1?api_key=171fe27dbfecc58e2a18fbced644cda9')
     
     
   }, []);
