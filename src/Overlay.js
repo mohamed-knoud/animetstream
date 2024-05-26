@@ -11,7 +11,7 @@ function Overlay(props) {
 
  
   useEffect(() => {
-    axios.get(`https://consume-mu.vercel.app/anime/gogoanime/${query}`)
+    axios.get(`https://sup-proxy.zephex0-f6c.workers.dev/api-json?url=https://consume-mu.vercel.app/anime/gogoanime/${query}?api_key=171fe27dbfecc58e2a18fbced644cda9`)
       .then(response => {
         // console.log(response.data.results);
         setAnimes(response.data.results || []) 
