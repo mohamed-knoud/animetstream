@@ -31,7 +31,7 @@ const plusSlides=(n) =>{
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`https://cors-anywhere.herokuapp.com/https://consume-mu.vercel.app/meta/anilist/popular?page=1&perPage=20`);
+        const response = await axios.get(`https://consume-mu.vercel.app/meta/anilist/popular?page=1&perPage=20`);
         
         setAnimes(response.data.results || []);
       } catch (error) {
