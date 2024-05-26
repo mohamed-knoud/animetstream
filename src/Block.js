@@ -16,15 +16,15 @@ function Block(props) {
   };
 
   const handleClick3 = ()=>{
-        fetchData('https://cors-anywhere.herokuapp.com/https://consume-mu.vercel.app/meta/anilist/trending?page=1')
+        fetchData('https://consume-mu.vercel.app/meta/anilist/trending?page=1')
   }
   const handleClick4 = ()=>{
-        fetchData('https://cors-anywhere.herokuapp.com/https://consume-mu.vercel.app/meta/anilist/popular?page=1&perPage=20')
+        fetchData('https://consume-mu.vercel.app/meta/anilist/popular?page=1&perPage=20')
   }
   useEffect(() => {
 
 
-    fetchData('https://cors-anywhere.herokuapp.com/https://consume-mu.vercel.app/meta/anilist/trending?page=1')
+    fetchData('https://consume-mu.vercel.app/meta/anilist/trending?page=1')
     
     
   }, []);
