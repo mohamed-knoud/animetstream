@@ -365,7 +365,7 @@ const Watch = forwardRef((props, ref) => {
   currentItems.length > 0 ? (
     currentItems.map((episode) => (
       <div key={episode.id} onClick={()=>{setEpisodeId(episode.id);setEpisodeNumber(episode.number);}} style={{display:'flex',flexDirection:'column'}}>
-        <img style={{cursor:'pointer',borderRadius:'10px',marginRight:'15px',width:'200px',aspectRatio:'16/9',objectFit:'cover'}} src={episode.image ? episode.image : image} alt={episode.title ? episode.title:""} /><span style={{alignSelf:'start',color:'white'}}>{episode.title ? episode.title : "Episode "+episode.number}</span>
+        <img style={{cursor:'pointer',borderRadius:'10px',marginRight:'15px',width:'150px',aspectRatio:'16/9',objectFit:'cover'}} src={episode.image ? episode.image : image} alt={episode.title ? episode.title:""} /><span style={{alignSelf:'start',color:'white'}}>{episode.title ? episode.title : "Episode "+episode.number}</span>
       </div>
     ))
   ) : (
