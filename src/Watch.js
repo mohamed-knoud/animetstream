@@ -145,11 +145,11 @@ const Watch = forwardRef((props, ref) => {
         }
   
         }).catch(error=>{
-          alert(error)
+          // alert(error)
         })
        
       }).catch(error=>{
-        alert(error)
+        // alert(error)
         axios.get(`https://consume-mu.vercel.app/anime/gogoanime/info/${animeId}`).then(data=>{
         setAnimeId(data.data.id)
         setTitle(data.data.title)
@@ -218,10 +218,10 @@ const Watch = forwardRef((props, ref) => {
         }
   
         }).catch(error=>{
-          alert(error)
+          // alert(error)
         })
         }).catch(error=>{
-          alert(error)
+          // alert(error)
         })
       })
       
@@ -292,7 +292,7 @@ const Watch = forwardRef((props, ref) => {
         }
   
         }).catch(error=>{
-          alert(error)
+          // alert(error)
         })
   }, [episodeId]);
 
