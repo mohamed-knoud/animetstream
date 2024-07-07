@@ -104,9 +104,7 @@ const Watch = forwardRef((props, ref) => {
               hls.loadSource(quality.url);
             })
             
-            hls.on(window.Hls.Events.MANIFEST_PARSED, () => {
-              videoRef.current.play();
-            });
+           
             hls.on(window.Hls.Events.MANIFEST_PARSED, function(event, data) {
               const availableQualities = hls.levels.map((l)=>l.height)
               defaultOptions.controls = [
@@ -178,9 +176,7 @@ const Watch = forwardRef((props, ref) => {
               hls.loadSource(quality.url);
             })
             
-            hls.on(window.Hls.Events.MANIFEST_PARSED, () => {
-              videoRef.current.play();
-            });
+            
             hls.on(window.Hls.Events.MANIFEST_PARSED, function(event, data) {
               const availableQualities = hls.levels.map((l)=>l.height)
               defaultOptions.controls = [
@@ -254,9 +250,7 @@ const Watch = forwardRef((props, ref) => {
               hls.loadSource(quality.url);
             })
             
-            hls.on(window.Hls.Events.MANIFEST_PARSED, () => {
-              videoRef.current.play();
-            });
+            
             hls.on(window.Hls.Events.MANIFEST_PARSED, function(event, data) {
               const availableQualities = hls.levels.map((l)=>l.height)
               defaultOptions.controls = [
