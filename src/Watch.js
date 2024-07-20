@@ -100,9 +100,8 @@ const Watch = forwardRef((props, ref) => {
               window.hls.destroy();
             }
             const hls = new window.Hls();
-            data.data.sources.forEach(quality=>{
-              hls.loadSource(quality.url);
-            })
+            hls.loadSource(data.data.sources[0].url);
+            
             
            
             hls.on(window.Hls.Events.MANIFEST_PARSED, function(event, data) {
@@ -172,9 +171,8 @@ const Watch = forwardRef((props, ref) => {
               window.hls.destroy();
             }
             const hls = new window.Hls();
-            data.data.sources.forEach(quality=>{
-              hls.loadSource(quality.url);
-            })
+            hls.loadSource(data.data.sources[0].url);
+
             
             
             hls.on(window.Hls.Events.MANIFEST_PARSED, function(event, data) {
@@ -246,9 +244,8 @@ const Watch = forwardRef((props, ref) => {
               window.hls.destroy();
             }
             const hls = new window.Hls();
-            data.data.sources.forEach(quality=>{
-              hls.loadSource(quality.url);
-            })
+            hls.loadSource(data.data.sources[0].url);
+
             
             
             hls.on(window.Hls.Events.MANIFEST_PARSED, function(event, data) {
