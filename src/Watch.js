@@ -93,7 +93,7 @@ const Watch = forwardRef((props, ref) => {
 
        
         axios.get(`https://consume-mu.vercel.app/meta/anilist/watch/${data.data.episodes[0].id}`).then(data=>{
-
+        console.log(data)
           
           if (window.Hls.isSupported()) {
             if(window.hls) {
@@ -150,6 +150,7 @@ const Watch = forwardRef((props, ref) => {
       }).catch(error=>{
         // alert(error)
         axios.get(`https://consume-mu.vercel.app/anime/gogoanime/info/${animeId}`).then(data=>{
+        console.log(data)
         setAnimeId(data.data.id)
         setTitle(data.data.title)
         setAnimeId(data.data.episodes[0].id)
