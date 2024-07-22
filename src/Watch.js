@@ -172,7 +172,7 @@ const Watch = forwardRef((props, ref) => {
               window.hls.destroy();
             }
             const hls = new window.Hls();
-            hls.loadSource(data.data.sources[0].url);
+            hls.loadSource(data.data.sources[3].url);
 
             
             
@@ -245,7 +245,7 @@ const Watch = forwardRef((props, ref) => {
               window.hls.destroy();
             }
             const hls = new window.Hls();
-            hls.loadSource(data.data.sources[0].url);
+            hls.loadSource(data.data.sources[3].url);
 
             
             
