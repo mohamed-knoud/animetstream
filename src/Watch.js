@@ -92,7 +92,7 @@ const Watch = forwardRef((props, ref) => {
         setImage(data.data.image)
 
        
-        axios.get(`https://consume-mu.vercel.app/meta/anilist/watch/${data.data.episodes[0].id}`).then(data=>{
+        axios.get(`https://72.195.101.99:4145/https://consume-mu.vercel.app/meta/anilist/watch/${data.data.episodes[0].id}`).then(data=>{
         console.log(data)
           
           if (window.Hls.isSupported()) {
@@ -237,7 +237,7 @@ const Watch = forwardRef((props, ref) => {
   useEffect(() => {
     setSpinner(true)
 
-    axios.get(`https://consume-mu.vercel.app/anime/gogoanime/watch/${episodeId}`).then(data=>{
+    axios.get(`https://72.195.101.99:4145/https://consume-mu.vercel.app/anime/gogoanime/watch/${episodeId}`).then(data=>{
           
 
           if (window.Hls.isSupported()) {
