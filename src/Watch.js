@@ -164,7 +164,7 @@ const Watch = forwardRef((props, ref) => {
         setDuration(data.data.duration)
         setRating(data.data.rating)
         setReleaseDate(data.data.releaseDate)
-        axios.get(`https://consume-mu.vercel.app/anime/gogoanime/watch/${data.data.episodes[0].id}`).then(data=>{
+        axios.get(`https://72.195.101.99:4145/https://consume-mu.vercel.app/anime/gogoanime/watch/${data.data.episodes[0].id}`).then(data=>{
           
 
           if (window.Hls.isSupported()) {
