@@ -100,7 +100,7 @@ const Watch = forwardRef((props, ref) => {
               window.hls.destroy();
             }
             const hls = new window.Hls();
-            hls.loadSource("https://corsproxy.io/?"+data.data.sources[2].url);
+            hls.loadSource("https://proxy-ryan.vercel.app/cors?url="+data.data.sources[2].url);
             
             
            
@@ -172,7 +172,7 @@ const Watch = forwardRef((props, ref) => {
               window.hls.destroy();
             }
             const hls = new window.Hls();
-            hls.loadSource("https://corsproxy.io/?"+data.data.sources[2].url);
+            hls.loadSource("https://proxy-ryan.vercel.app/cors?url="+data.data.sources[2].url);
 
             
             
@@ -245,7 +245,7 @@ const Watch = forwardRef((props, ref) => {
               window.hls.destroy();
             }
             const hls = new window.Hls();
-            hls.loadSource("https://corsproxy.io/?"+data.data.sources[3].url);
+            hls.loadSource("https://proxy-ryan.vercel.app/cors?url="+data.data.sources[3].url);
 
             
             
