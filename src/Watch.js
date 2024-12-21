@@ -76,7 +76,7 @@ const Watch = forwardRef((props, ref) => {
   };
   useEffect(() => {
     const fetchData = async () => {
-      await axios.get(`https://proxy-ryan.vercel.app/cors?url=https://proxy-ryan.vercel.app/cors?url=https://consume-mu.vercel.app/meta/anilist/info/${animeId}`).then(data=>{
+      await axios.get(`https://proxy-ryan.vercel.app/cors?url=https://consume-mu.vercel.app/meta/anilist/info/${animeId}`).then(data=>{
         setTitle(data.data.title.english)
         setAnimeId(data.data.episodes[0].id)
         setEpisodeNumber(data.data.episodes[0].number)
