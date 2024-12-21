@@ -76,7 +76,7 @@ const Watch = forwardRef((props, ref) => {
   };
   useEffect(() => {
     const fetchData = async () => {
-      await axios.get(`https://consume-mu.vercel.app/meta/anilist/info/${animeId}`).then(data=>{
+      await axios.get(`https://proxy-ryan.vercel.app/cors?url=https://proxy-ryan.vercel.app/cors?url=https://consume-mu.vercel.app/meta/anilist/info/${animeId}`).then(data=>{
         setTitle(data.data.title.english)
         setAnimeId(data.data.episodes[0].id)
         setEpisodeNumber(data.data.episodes[0].number)
@@ -92,7 +92,7 @@ const Watch = forwardRef((props, ref) => {
         setImage(data.data.image)
 
        
-        axios.get(`https://consume-mu.vercel.app/meta/anilist/watch/${data.data.episodes[0].id}`).then(data=>{
+        axios.get(`https://proxy-ryan.vercel.app/cors?url=https://consume-mu.vercel.app/meta/anilist/watch/${data.data.episodes[0].id}`).then(data=>{
         console.log(data)
           
           if (window.Hls.isSupported()) {
@@ -164,7 +164,7 @@ const Watch = forwardRef((props, ref) => {
         setDuration(data.data.duration)
         setRating(data.data.rating)
         setReleaseDate(data.data.releaseDate)
-        axios.get(`https://consume-mu.vercel.app/anime/gogoanime/watch/${data.data.episodes[0].id}`).then(data=>{
+        axios.get(`https://proxy-ryan.vercel.app/cors?url=https://consume-mu.vercel.app/anime/gogoanime/watch/${data.data.episodes[0].id}`).then(data=>{
           
 
           if (window.Hls.isSupported()) {
@@ -237,7 +237,7 @@ const Watch = forwardRef((props, ref) => {
   useEffect(() => {
     setSpinner(true)
 
-    axios.get(`https://consume-mu.vercel.app/anime/gogoanime/watch/${episodeId}`).then(data=>{
+    axios.get(`https://proxy-ryan.vercel.app/cors?url=https://consume-mu.vercel.app/anime/gogoanime/watch/${episodeId}`).then(data=>{
           
 
           if (window.Hls.isSupported()) {
