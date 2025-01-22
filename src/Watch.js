@@ -108,6 +108,7 @@ const Watch = forwardRef((props, ref) => {
            
             hls.on(window.Hls.Events.MANIFEST_PARSED, function(event, data) {
               const availableQualities = episodeQuality.map(el=>el.quality)
+              console.log(availableQualities)
               defaultOptions.controls = [
                 'play-large', // The large play button in the center   
                 'play', // Play/pause playback   
@@ -180,6 +181,7 @@ const Watch = forwardRef((props, ref) => {
             
             hls.on(window.Hls.Events.MANIFEST_PARSED, function(event, data) {
               const availableQualities = episodeQuality.map(el=>el.quality)
+              console.log(availableQualities)
               defaultOptions.controls = [
                 'play-large', // The large play button in the center   
                 'play', // Play/pause playback   
@@ -254,6 +256,7 @@ const Watch = forwardRef((props, ref) => {
             
             hls.on(window.Hls.Events.MANIFEST_PARSED, function(event, data) {
                 const availableQualities = episodeQuality.map(el=>el.quality)
+                console.log(availableQualities)
                 defaultOptions.controls = [
                 'play-large', // The large play button in the center   
                 'play', // Play/pause playback   
