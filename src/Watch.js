@@ -5,7 +5,7 @@ import axios from 'axios'
 import './Watch.css';
 import Nav from './Nav'
 import Cookies from 'js-cookie';
-
+const episodeQuality = null
 const pageSize = 10; // Number of items per page
 
 const Watch = forwardRef((props, ref) => {
@@ -94,7 +94,9 @@ const Watch = forwardRef((props, ref) => {
        
         axios.get(`https://goodproxy.goodproxy.workers.dev/fetch?url=https://consume-mu.vercel.app/meta/anilist/watch/${data.data.episodes[0].id}`).then(data=>{
         console.log(data)
-          
+            episodeQuality = data.data?.sources?.map((el) => {
+    return { quality: el.quality, url: el.url };
+  });
           if (window.Hls.isSupported()) {
             if(window.hls) {
               window.hls.destroy();
@@ -105,7 +107,7 @@ const Watch = forwardRef((props, ref) => {
             
            
             hls.on(window.Hls.Events.MANIFEST_PARSED, function(event, data) {
-              const availableQualities = hls.levels.map((l)=>l.height)
+              const availableQualities = episodeQuality
               defaultOptions.controls = [
                 'play-large', // The large play button in the center   
                 'play', // Play/pause playback   
@@ -177,7 +179,7 @@ const Watch = forwardRef((props, ref) => {
             
             
             hls.on(window.Hls.Events.MANIFEST_PARSED, function(event, data) {
-              const availableQualities = hls.levels.map((l)=>l.height)
+              const availableQualities = episodeQuality
               defaultOptions.controls = [
                 'play-large', // The large play button in the center   
                 'play', // Play/pause playback   
@@ -251,7 +253,7 @@ const Watch = forwardRef((props, ref) => {
             
             
             hls.on(window.Hls.Events.MANIFEST_PARSED, function(event, data) {
-              const availableQualities = hls.levels.map((l)=>l.height)
+              const availableQualities = episodeQuality
               defaultOptions.controls = [
                 'play-large', // The large play button in the center   
                 'play', // Play/pause playback   
