@@ -104,33 +104,9 @@ const Watch = forwardRef((props, ref) => {
             const hls = new window.Hls();
             hls.loadSource("https://goodproxy.goodproxy.workers.dev/fetch?url="+data.data.sources[2].url);
             
-            
-           
-            hls.on(window.Hls.Events.MANIFEST_PARSED, function(event, data) {
               const availableQualities = episodeQuality.map(el=>el.quality)
-              console.log(availableQualities)
-              defaultOptions.controls = [
-                'play-large', // The large play button in the center   
-                'play', // Play/pause playback   
-                'fast-forward', // Fast forward by the seek time (default 10 seconds)    
-                'progress', // The progress bar and scrubber for playback and buffering    
-                'current-time', // The current time of playback    
-                'duration', // The full duration of the media    
-                'mute', // Toggle mute    
-                'volume', // Volume control    
-                'settings', // Settings menu    
-                'pip', // Picture-in-picture (currently Safari only)    
-                'fullscreen', // Toggle fullscreen
-              ]
-              // Assuming you want to start playing the first quality level
-              defaultOptions.quality = {
-                default :availableQualities[0].quality,
-                option:availableQualities,
-                forced : true,
-                onChange: (e) => updateQuality(e)
-              }
-  
-              new Plyr(videoRef.current,defaultOptions); 
+            
+              new Plyr(videoRef.current); 
               setSpinner(false)
            
             });
@@ -177,33 +153,11 @@ const Watch = forwardRef((props, ref) => {
             const hls = new window.Hls();
             hls.loadSource("https://goodproxy.goodproxy.workers.dev/fetch?url="+data.data.sources[2].url);
 
-            
-            
-            hls.on(window.Hls.Events.MANIFEST_PARSED, function(event, data) {
               const availableQualities = episodeQuality.map(el=>el.quality)
-              console.log(availableQualities)
-              defaultOptions.controls = [
-                'play-large', // The large play button in the center   
-                'play', // Play/pause playback   
-                'fast-forward', // Fast forward by the seek time (default 10 seconds)    
-                'progress', // The progress bar and scrubber for playback and buffering    
-                'current-time', // The current time of playback    
-                'duration', // The full duration of the media    
-                'mute', // Toggle mute    
-                'volume', // Volume control    
-                'settings', // Settings menu    
-                'pip', // Picture-in-picture (currently Safari only)    
-                'fullscreen', // Toggle fullscreen
-              ]
-              // Assuming you want to start playing the first quality level
-              defaultOptions.quality = {
-                default :availableQualities[0].quality,
-                option:availableQualities,
-                forced : true,
-                onChange: (e) => updateQuality(e)
-              }
-  
-              new Plyr(videoRef.current,defaultOptions); 
+            
+            
+             
+              new Plyr(videoRef.current); 
               setSpinner(false)
            
             });
@@ -254,31 +208,10 @@ const Watch = forwardRef((props, ref) => {
 
             
             
-            hls.on(window.Hls.Events.MANIFEST_PARSED, function(event, data) {
                 const availableQualities = episodeQuality.map(el=>el.quality)
-                console.log(availableQualities)
-                defaultOptions.controls = [
-                'play-large', // The large play button in the center   
-                'play', // Play/pause playback   
-                'fast-forward', // Fast forward by the seek time (default 10 seconds)    
-                'progress', // The progress bar and scrubber for playback and buffering    
-                'current-time', // The current time of playback    
-                'duration', // The full duration of the media    
-                'mute', // Toggle mute    
-                'volume', // Volume control    
-                'settings', // Settings menu    
-                'pip', // Picture-in-picture (currently Safari only)    
-                'fullscreen', // Toggle fullscreen
-              ]
-              // Assuming you want to start playing the first quality level
-              defaultOptions.quality = {
-                default :availableQualities[0].quality,
-                option:availableQualities,
-                forced : true,
-                onChange: (e) => updateQuality(e)
-              }
+                
   
-              new Plyr(videoRef.current,defaultOptions); 
+              new Plyr(videoRef.current); 
               setSpinner(false)
            
             });
