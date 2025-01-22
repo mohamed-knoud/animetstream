@@ -165,7 +165,7 @@ const Watch = forwardRef((props, ref) => {
         setRating(data.data.rating)
         setReleaseDate(data.data.releaseDate)
         axios.get(`https://goodproxy.goodproxy.workers.dev/fetch?url=https://consume-mu.vercel.app/anime/gogoanime/watch/${data.data.episodes[0].id}`).then(data=>{
-          
+          console.log(data)
 
           if (window.Hls.isSupported()) {
             if(window.hls) {
@@ -239,6 +239,7 @@ const Watch = forwardRef((props, ref) => {
 
     axios.get(`https://goodproxy.goodproxy.workers.dev/fetch?url=https://consume-mu.vercel.app/anime/gogoanime/watch/${episodeId}`).then(data=>{
           
+          console.log(data)
 
           if (window.Hls.isSupported()) {
             if(window.hls) {
