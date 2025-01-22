@@ -107,7 +107,7 @@ const Watch = forwardRef((props, ref) => {
             
            
             hls.on(window.Hls.Events.MANIFEST_PARSED, function(event, data) {
-              const availableQualities = episodeQuality
+              const availableQualities = episodeQuality.map(el=>el.quality)
               defaultOptions.controls = [
                 'play-large', // The large play button in the center   
                 'play', // Play/pause playback   
@@ -123,7 +123,7 @@ const Watch = forwardRef((props, ref) => {
               ]
               // Assuming you want to start playing the first quality level
               defaultOptions.quality = {
-                default :availableQualities[0],
+                default :availableQualities[0].quality,
                 option:availableQualities,
                 forced : true,
                 onChange: (e) => updateQuality(e)
@@ -179,7 +179,7 @@ const Watch = forwardRef((props, ref) => {
             
             
             hls.on(window.Hls.Events.MANIFEST_PARSED, function(event, data) {
-              const availableQualities = episodeQuality
+              const availableQualities = episodeQuality.map(el=>el.quality)
               defaultOptions.controls = [
                 'play-large', // The large play button in the center   
                 'play', // Play/pause playback   
@@ -195,7 +195,7 @@ const Watch = forwardRef((props, ref) => {
               ]
               // Assuming you want to start playing the first quality level
               defaultOptions.quality = {
-                default :availableQualities[0],
+                default :availableQualities[0].quality,
                 option:availableQualities,
                 forced : true,
                 onChange: (e) => updateQuality(e)
@@ -253,8 +253,8 @@ const Watch = forwardRef((props, ref) => {
             
             
             hls.on(window.Hls.Events.MANIFEST_PARSED, function(event, data) {
-              const availableQualities = episodeQuality
-              defaultOptions.controls = [
+                const availableQualities = episodeQuality.map(el=>el.quality)
+                defaultOptions.controls = [
                 'play-large', // The large play button in the center   
                 'play', // Play/pause playback   
                 'fast-forward', // Fast forward by the seek time (default 10 seconds)    
@@ -269,7 +269,7 @@ const Watch = forwardRef((props, ref) => {
               ]
               // Assuming you want to start playing the first quality level
               defaultOptions.quality = {
-                default :availableQualities[0],
+                default :availableQualities[0].quality,
                 option:availableQualities,
                 forced : true,
                 onChange: (e) => updateQuality(e)
