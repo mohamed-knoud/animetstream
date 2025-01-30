@@ -372,3 +372,5 @@ const Watch = forwardRef((props, ref) => {
     </>
   )
 })
+
+export default Watch
