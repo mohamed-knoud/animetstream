@@ -5,7 +5,7 @@ import axios from 'axios'
 import './Watch.css';
 import Nav from './Nav'
 import Cookies from 'js-cookie';
-const episodeQuality = null
+
 const pageSize = 10; // Number of items per page
 
 const Watch = forwardRef((props, ref) => {
@@ -76,7 +76,7 @@ const Watch = forwardRef((props, ref) => {
   };
   useEffect(() => {
     const fetchData = async () => {
-      await axios.get(`https://goodproxy.goodproxy.workers.dev/fetch?url=https://consume-mu.vercel.app/meta/anilist/info/${animeId}`).then(data=>{
+      await axios.get(`https://proxy-ryan.vercel.app/cors?url=https://consume-mu.vercel.app/meta/anilist/info/${animeId}`).then(data=>{
         setTitle(data.data.title.english)
         setAnimeId(data.data.episodes[0].id)
         setEpisodeNumber(data.data.episodes[0].number)
@@ -92,21 +92,42 @@ const Watch = forwardRef((props, ref) => {
         setImage(data.data.image)
 
        
-        axios.get(`https://goodproxy.goodproxy.workers.dev/fetch?url=https://consume-mu.vercel.app/meta/anilist/watch/${data.data.episodes[0].id}`).then(data=>{
+        axios.get(`https://proxy-ryan.vercel.app/cors?url=https://consume-mu.vercel.app/meta/anilist/watch/${data.data.episodes[0].id}`).then(data=>{
         console.log(data)
-            episodeQuality = data.data?.sources?.map((el) => {
-    return { quality: el.quality, url: el.url };
-  });
+          
           if (window.Hls.isSupported()) {
             if(window.hls) {
               window.hls.destroy();
             }
             const hls = new window.Hls();
-            hls.loadSource("https://goodproxy.goodproxy.workers.dev/fetch?url="+data.data.sources[2].url);
+            hls.loadSource("https://proxy-ryan.vercel.app/cors?url="+data.data.sources[2].url);
             
-              const availableQualities = episodeQuality.map(el=>el.quality)
             
-              new Plyr(videoRef.current); 
+           
+            hls.on(window.Hls.Events.MANIFEST_PARSED, function(event, data) {
+              const availableQualities = hls.levels.map((l)=>l.height)
+              defaultOptions.controls = [
+                'play-large', // The large play button in the center   
+                'play', // Play/pause playback   
+                'fast-forward', // Fast forward by the seek time (default 10 seconds)    
+                'progress', // The progress bar and scrubber for playback and buffering    
+                'current-time', // The current time of playback    
+                'duration', // The full duration of the media    
+                'mute', // Toggle mute    
+                'volume', // Volume control    
+                'settings', // Settings menu    
+                'pip', // Picture-in-picture (currently Safari only)    
+                'fullscreen', // Toggle fullscreen
+              ]
+              // Assuming you want to start playing the first quality level
+              defaultOptions.quality = {
+                default :availableQualities[0],
+                option:availableQualities,
+                forced : true,
+                onChange: (e) => updateQuality(e)
+              }
+  
+              new Plyr(videoRef.current,defaultOptions); 
               setSpinner(false)
            
             });
@@ -143,21 +164,42 @@ const Watch = forwardRef((props, ref) => {
         setDuration(data.data.duration)
         setRating(data.data.rating)
         setReleaseDate(data.data.releaseDate)
-        axios.get(`https://goodproxy.goodproxy.workers.dev/fetch?url=https://consume-mu.vercel.app/anime/gogoanime/watch/${data.data.episodes[0].id}`).then(data=>{
-          console.log(data)
+        axios.get(`https://proxy-ryan.vercel.app/cors?url=https://consume-mu.vercel.app/anime/gogoanime/watch/${data.data.episodes[0].id}`).then(data=>{
+          
 
           if (window.Hls.isSupported()) {
             if(window.hls) {
               window.hls.destroy();
             }
             const hls = new window.Hls();
-            hls.loadSource("https://goodproxy.goodproxy.workers.dev/fetch?url="+data.data.sources[2].url);
+            hls.loadSource("https://proxy-ryan.vercel.app/cors?url="+data.data.sources[2].url);
 
-              const availableQualities = episodeQuality.map(el=>el.quality)
             
             
-             
-              new Plyr(videoRef.current); 
+            hls.on(window.Hls.Events.MANIFEST_PARSED, function(event, data) {
+              const availableQualities = hls.levels.map((l)=>l.height)
+              defaultOptions.controls = [
+                'play-large', // The large play button in the center   
+                'play', // Play/pause playback   
+                'fast-forward', // Fast forward by the seek time (default 10 seconds)    
+                'progress', // The progress bar and scrubber for playback and buffering    
+                'current-time', // The current time of playback    
+                'duration', // The full duration of the media    
+                'mute', // Toggle mute    
+                'volume', // Volume control    
+                'settings', // Settings menu    
+                'pip', // Picture-in-picture (currently Safari only)    
+                'fullscreen', // Toggle fullscreen
+              ]
+              // Assuming you want to start playing the first quality level
+              defaultOptions.quality = {
+                default :availableQualities[0],
+                option:availableQualities,
+                forced : true,
+                onChange: (e) => updateQuality(e)
+              }
+  
+              new Plyr(videoRef.current,defaultOptions); 
               setSpinner(false)
            
             });
@@ -195,23 +237,42 @@ const Watch = forwardRef((props, ref) => {
   useEffect(() => {
     setSpinner(true)
 
-    axios.get(`https://goodproxy.goodproxy.workers.dev/fetch?url=https://consume-mu.vercel.app/anime/gogoanime/watch/${episodeId}`).then(data=>{
+    axios.get(`https://proxy-ryan.vercel.app/cors?url=https://consume-mu.vercel.app/anime/gogoanime/watch/${episodeId}`).then(data=>{
           
-          console.log(data)
 
           if (window.Hls.isSupported()) {
             if(window.hls) {
               window.hls.destroy();
             }
             const hls = new window.Hls();
-            hls.loadSource("https://goodproxy.goodproxy.workers.dev/fetch?url="+data.data.sources[3].url);
+            hls.loadSource("https://proxy-ryan.vercel.app/cors?url="+data.data.sources[3].url);
 
             
             
-                const availableQualities = episodeQuality.map(el=>el.quality)
-                
+            hls.on(window.Hls.Events.MANIFEST_PARSED, function(event, data) {
+              const availableQualities = hls.levels.map((l)=>l.height)
+              defaultOptions.controls = [
+                'play-large', // The large play button in the center   
+                'play', // Play/pause playback   
+                'fast-forward', // Fast forward by the seek time (default 10 seconds)    
+                'progress', // The progress bar and scrubber for playback and buffering    
+                'current-time', // The current time of playback    
+                'duration', // The full duration of the media    
+                'mute', // Toggle mute    
+                'volume', // Volume control    
+                'settings', // Settings menu    
+                'pip', // Picture-in-picture (currently Safari only)    
+                'fullscreen', // Toggle fullscreen
+              ]
+              // Assuming you want to start playing the first quality level
+              defaultOptions.quality = {
+                default :availableQualities[0],
+                option:availableQualities,
+                forced : true,
+                onChange: (e) => updateQuality(e)
+              }
   
-              new Plyr(videoRef.current); 
+              new Plyr(videoRef.current,defaultOptions); 
               setSpinner(false)
            
             });
@@ -311,5 +372,3 @@ const Watch = forwardRef((props, ref) => {
     </>
   )
 })
-
-export default Watch
