@@ -27,7 +27,7 @@ const Watch = forwardRef((props, ref) => {
     setCurrentPage(page);
   };
   const [totalPages, settotalPages] = useState(0);
-  const [totalEpisodes, settotalEpisodes] = useState();
+  //const [totalEpisodes, settotalEpisodes] = useState();
   const [startIndex,setStartIndex] = useState(0)
   const [endIndex,setEndIndex] = useState(0)
   const [currentItems,setcurrentItems] = useState([])
