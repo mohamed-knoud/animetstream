@@ -116,14 +116,14 @@ useEffect(() => {
 
   hls.loadSource(videoUrl);
   hls.attachMedia(videoRef.current);
-
+ videoRef.current.style.display = "block"
 } else {
   // If Hls is not supported, fall back to native video element
   if (videoRef.current) {
     const videoUrl = "https://hianime-proxy-omega.vercel.app/m3u8-proxy?url=" + response2.data.data.sources[0].url;
     console.log("Native video URL: ", videoUrl);
     videoRef.current.src = videoUrl;
-
+    videoRef.current.style.display = "block"
     // For better fallback handling, try to autoplay if supported
     videoRef.current.play().catch(err => {
       console.error("Error trying to play the video (native):", err);
