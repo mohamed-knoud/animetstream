@@ -112,7 +112,7 @@ useEffect(() => {
 		      let hls = new Hls();
 
 
-			      hls.loadSource("https://proxies-rust.vercel.app/m3u8-proxy?url="+response2.data.data.sources[0].url);
+			      hls.loadSource("https://hianime-proxy-omega.vercel.app/m3u8-proxy?url="+response2.data.data.sources[0].url);
 			      hls.attachMedia(videoRef.current);
 			      hls.on(Hls.Events.MANIFEST_PARSED,function() {
 				    videoRef.play();
@@ -121,7 +121,7 @@ useEffect(() => {
 		
 		    // If Hls is not supported, fall back to native video element
 		    if (videoRef.current) {
-		      videoRef.current.src = "https://proxies-rust.vercel.app/m3u8-proxy?url="+response2.data.data.sources[0].url;
+		      videoRef.current.src = "https://hianime-proxy-omega.vercel.app/m3u8-proxy?url="+response2.data.data.sources[0].url;
 		    }
 } catch (error) {
 	console.error(error);
