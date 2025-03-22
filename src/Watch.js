@@ -117,20 +117,6 @@ useEffect(() => {
   hls.loadSource(videoUrl);
   hls.attachMedia(videoRef.current);
 
-  hls.on(Hls.Events.MANIFEST_PARSED, function() {
-    console.log("Manifest parsed, starting video");
-    videoRef.current.play().catch(err => {
-      console.error("Error trying to play the video:", err);
-    });
-  });
-
-  hls.on(Hls.Events.ERROR, function(event, data) {
-    console.error("HLS Error: ", data);
-  });
-
-  hls.on(Hls.Events.LOAD_ERROR, function(event, data) {
-    console.error("HLS Load Error: ", data);
-  });
 } else {
   // If Hls is not supported, fall back to native video element
   if (videoRef.current) {
