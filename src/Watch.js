@@ -15,6 +15,7 @@ let res
   let { animeId } = useParams();
         Cookies.set('lastWatchedAnime', animeId);
   //const videoRef = useRef(null);
+const player = new Plyr('#player');
 
   const [animeid,setAnimeId] = useState(0)
   const defaultOptions = {};
@@ -169,7 +170,7 @@ useEffect(() => {
   </div>}
   <div className="containerr">
 
-          <video ref={videoRef} style={{display:'none'}} controls></video>
+          <video ref={videoRef} id="player" style={{display:'none'}} controls></video>
          
           <div ref={spinnerRef} className="spinner-container">
             <div className="spinner"></div>
