@@ -20,6 +20,8 @@ let res
   const videoRef = useRef(null);
   const spinnerRef = useRef(null)
   const [title,setTitle] = useState('')
+  const [poster,setPoster] = useState('')
+	
   const [episodeNumber,setEpisodeNumber] = useState()
   const [totalEpisodes,setTotalEpisodes] = useState([])
   const [episodes,setEpisodes] = useState([])
@@ -47,7 +49,8 @@ let res
   },[isLoading])
 useEffect(async ()=>{
     res = await axios.get(`https://proxy-ryan.vercel.app/cors?url=https://anime-brown-three.vercel.app/api/v2/hianime/anime/${animeId}`);
-	console.log(res)
+	//console.log(res)
+	setPoster(res.data.data.anime.info.poster)
 	setTitle(res.data.data.anime.info.name)
 	setEpisodeNumber(1)
 },[])
@@ -178,7 +181,7 @@ useEffect(() => {
   currentItems.length > 0 ? (
     currentItems.map((episode) => (
       <div key={episode.id} onClick={()=>{setEpisodeId(episode.id);setEpisodeNumber(episode.number);}} style={{display:'flex',flexDirection:'column'}}>
-      <img style={{cursor:'pointer',borderRadius:'10px',marginRight:'15px',width:'150px',aspectRatio:'16/9',objectFit:'cover'}} src={res.data.data.anime.info.poster} alt={episode.title ? episode.title:""} /><span style={{alignSelf:'start',color:'white'}}>{episode.title ? (episode.title.length>19 ? episode.title.slice(0, 16)+'...':episode.title) : "Episode "+episode.number}</span>
+      <img style={{cursor:'pointer',borderRadius:'10px',marginRight:'15px',width:'150px',aspectRatio:'16/9',objectFit:'cover'}} src={poster} alt={episode.title ? episode.title:""} /><span style={{alignSelf:'start',color:'white'}}>{episode.title ? (episode.title.length>19 ? episode.title.slice(0, 16)+'...':episode.title) : "Episode "+episode.number}</span>
 	</div>
     ))
   ) : (
