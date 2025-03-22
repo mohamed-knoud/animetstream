@@ -175,7 +175,7 @@ useEffect(() => {
 
          
 
-	  <video ref={videoRef} controls ">
+	  <video src="" ref={videoRef} controls>
 	  
 	</video>
          
