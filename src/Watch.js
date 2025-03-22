@@ -5,7 +5,7 @@ import axios from 'axios'
 import './Watch.css';
 import Nav from './Nav'
 import Cookies from 'js-cookie';
-
+const reponse 
 const pageSize = 10; // Number of items per page
 
 const Watch = forwardRef((props, ref) => {
@@ -70,7 +70,7 @@ const Watch = forwardRef((props, ref) => {
 useEffect(() => {
         const fetchEpisodes = async () => {
             try {
-                const response = await axios.get(`https://proxy-ryan.vercel.app/cors?url=https://anime-brown-three.vercel.app/api/v2/hianime/anime/${animeId}/episodes`);
+                response = await axios.get(`https://proxy-ryan.vercel.app/cors?url=https://anime-brown-three.vercel.app/api/v2/hianime/anime/${animeId}/episodes`);
                 console.log(response.data);
                 const response2 = await axios.get(`https://anime-brown-three.vercel.app/api/v2/hianime/episode/sources?animeEpisodeId=${response.data.data.episodes[0].episodeId}&server=hd-1&category=dub`)
                 console.log(response2)  
