@@ -5,7 +5,7 @@ import axios from 'axios'
 import './Watch.css';
 import Nav from './Nav'
 import Cookies from 'js-cookie';
-const reponse 
+let reponse 
 const pageSize = 10; // Number of items per page
 
 const Watch = forwardRef((props, ref) => {
