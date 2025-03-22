@@ -171,6 +171,7 @@ setSpinner(false)
   }, [totalEpisodes,animeId,currentPage,startIndex,endIndex]);
 
  useEffect(() => {
+	 setSpinner(true)
      const options = {
               method: 'POST',
               url: 'https://http-cors-proxy.p.rapidapi.com/',
