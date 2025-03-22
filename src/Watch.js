@@ -107,23 +107,44 @@ useEffect(() => {
 	console.log(response2.data);
 		      var cors_api_host = 'cors-anywhere.herokuapp.com';
     var cors_api_url = 'https://' + cors_api_host + '/';
-		      if (Hls.isSupported()) {
-			      
-		      let hls = new Hls();
+		     if (Hls.isSupported()) {
+  let hls = new Hls();
 
+  // Log to verify if the URL is being set correctly
+  const videoUrl = "https://hianime-proxy-omega.vercel.app/m3u8-proxy?url=" + response2.data.data.sources[0].url;
+  console.log("Video URL: ", videoUrl);
 
-			      hls.loadSource("https://hianime-proxy-omega.vercel.app/m3u8-proxy?url="+response2.data.data.sources[0].url);
-			      hls.attachMedia(videoRef.current);
-			      hls.on(Hls.Events.MANIFEST_PARSED,function() {
-				    videoRef.current.play();
-				});
-		    }
-		else{
-		    // If Hls is not supported, fall back to native video element
-		    if (videoRef.current) {
-		      videoRef.current.src = "https://hianime-proxy-omega.vercel.app/m3u8-proxy?url="+response2.data.data.sources[0].url;
-		    }
-		}
+  hls.loadSource(videoUrl);
+  hls.attachMedia(videoRef.current);
+
+  hls.on(Hls.Events.MANIFEST_PARSED, function() {
+    console.log("Manifest parsed, starting video");
+    videoRef.current.play().catch(err => {
+      console.error("Error trying to play the video:", err);
+    });
+  });
+
+  hls.on(Hls.Events.ERROR, function(event, data) {
+    console.error("HLS Error: ", data);
+  });
+
+  hls.on(Hls.Events.LOAD_ERROR, function(event, data) {
+    console.error("HLS Load Error: ", data);
+  });
+} else {
+  // If Hls is not supported, fall back to native video element
+  if (videoRef.current) {
+    const videoUrl = "https://hianime-proxy-omega.vercel.app/m3u8-proxy?url=" + response2.data.data.sources[0].url;
+    console.log("Native video URL: ", videoUrl);
+    videoRef.current.src = videoUrl;
+
+    // For better fallback handling, try to autoplay if supported
+    videoRef.current.play().catch(err => {
+      console.error("Error trying to play the video (native):", err);
+    });
+  }
+}
+
 } catch (error) {
 	console.error(error);
 }
