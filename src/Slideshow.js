@@ -32,7 +32,7 @@ const plusSlides=(n) =>{
     const fetchData = async () => {
       try {
         const response = await axios.get(`https://anime-brown-three.vercel.app/api/v2/hianime/home`);
-        
+        console.log(response.data.results)
         setAnimes(response.data.results || []);
       } catch (error) {
         alert('Error fetching data:', error);
