@@ -20,6 +20,7 @@ const Watch = forwardRef((props, ref) => {
   const spinnerRef = useRef(null)
   const [title,setTitle] = useState('')
   const [episodeNumber,setEpisodeNumber] = useState()
+  const [totalEpisodes,setTotalEpisodes] = useState([])
   const [episodes,setEpisodes] = useState([])
   const [currentPage, setCurrentPage] = useState(1);
   const handlePageChange = (page) => {
