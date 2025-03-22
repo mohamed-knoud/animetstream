@@ -99,45 +99,7 @@ const player = new Plyr('#player');
   const [endIndex,setEndIndex] = useState(0)
   const [currentItems,setcurrentItems] = useState([])
   const [episodeId,setEpisodeId] = useState('')
-  const fetchEpisodeSources = async (episodeId) => {
-	setSpinner(true)
-	console.log(episodeId)	
-	try {
-    const options = {
-      method: 'POST',
-      url: 'https://http-cors-proxy.p.rapidapi.com/',
-      headers: {
-        'x-rapidapi-key': '2e4139dc3fmshfb131a66e36aa23p1bbef1jsncf62aca0e0bd',
-        'x-rapidapi-host': 'http-cors-proxy.p.rapidapi.com',
-        'Content-Type': 'application/json',
-        Origin: 'https://animetstream.vercel.app/',
-        'X-Requested-With': 'https://animetstream.vercel.app/'
-      },
-      data: {
-        url: `https://anime-brown-three.vercel.app/api/v2/hianime/episode/sources?animeEpisodeId=${episodeId}&server=hd-1&category=dub`
-      }
-    }
-const response2 = await axios.request(options);
-console.log(response2.data);
-      const videoUrl = "https://hianime-proxy-omega.vercel.app/m3u8-proxy?url=" + response2.data.data.sources[0].url;
 
-      if (Hls.isSupported()) {
-        let hls = new Hls();
-        hls.loadSource(videoUrl);
-        hls.attachMedia(videoRef.current);
-        setSpinner(false);
-        
-      } else {
-        // Fallback to native video
-        if (videoRef.current) {
-          videoRef.current.src = videoUrl;
-          videoRef.current.play().catch(err => console.error("Error trying to play the video:", err));
-        }
-      }
-    } catch (error) {
-      console.error('Error fetching video sources:', error);
-    }
-  };
   useEffect(()=>{
     if(isLoading){
       videoRef.current.style.display = "none"
@@ -183,72 +145,65 @@ useEffect(() => {
     </>;
   };
 useEffect(() => {
-	let hls_proxy_url
-        const fetchEpisodes = async () => {
-            try {
-                response = await axios.get(`https://proxy-ryan.vercel.app/cors?url=https://anime-brown-three.vercel.app/api/v2/hianime/anime/${animeId}/episodes`);
-                console.log(response)
-		    console.log(response.data.data.episodes);
-		    setEpisodes(response.data.data.episodes)
-		    setTotalEpisodes(response.data.data.episodes.length);
-              const options = {
-              method: 'POST',
-              url: 'https://http-cors-proxy.p.rapidapi.com/',
-              headers: {
-                'x-rapidapi-key': '2e4139dc3fmshfb131a66e36aa23p1bbef1jsncf62aca0e0bd',
-                'x-rapidapi-host': 'http-cors-proxy.p.rapidapi.com',
-                'Content-Type': 'application/json',
-                Origin: 'https://animetstream.vercel.app/',
-                'X-Requested-With': 'https://animetstream.vercel.app/'
-              },
-              data: {
-                url: `https://anime-brown-three.vercel.app/api/v2/hianime/episode/sources?animeEpisodeId=${response.data.data.episodes[0].episodeId}&server=hd-1&category=dub`
-              }
-            };try {
-	const response2 = await axios.request(options);
-	console.log(response2.data);
-		      var cors_api_host = 'cors-anywhere.herokuapp.com';
-    var cors_api_url = 'https://' + cors_api_host + '/';
-		     if (Hls.isSupported()) {
-  let hls = new Hls();
+    const fetchEpisodes = async () => {
+      try {
+        const response = await axios.get(`https://proxy-ryan.vercel.app/cors?url=https://anime-brown-three.vercel.app/api/v2/hianime/anime/${animeId}/episodes`);
+        console.log(response);
+        const episodeData = response.data.data.episodes;
+        setEpisodes(episodeData);
+        setTotalEpisodes(episodeData.length);
 
-  // Log to verify if the URL is being set correctly
-  const videoUrl = "https://hianime-proxy-omega.vercel.app/m3u8-proxy?url=" + response2.data.data.sources[0].url;
-  console.log("Video URL: ", videoUrl);
-
-  hls.loadSource(videoUrl);
-  hls.attachMedia(videoRef.current);
-setSpinner(false)
-} else {
-  // If Hls is not supported, fall back to native video element
-  if (videoRef.current) {
-    const videoUrl = "https://hianime-proxy-omega.vercel.app/m3u8-proxy?url=" + response2.data.data.sources[0].url;
-    console.log("Native video URL: ", videoUrl);
-	setSpinner(false)
-    videoRef.current.style.display = "block"
-    // For better fallback handling, try to autoplay if supported
-    videoRef.current.play().catch(err => {
-      console.error("Error trying to play the video (native):", err);
-    });
-  }
-}
-
-} catch (error) {
-	console.error(error);
-}
-                
-               // console.log(response2)  
-                //setEpisodes(response.data.episodes);
-                //setTotalEpisodes(response.data.totalEpisodes);
-                //setEpisodeNumber(response.data.episodes[0]?.number); // Optional chaining for safety
-                //setCurrentPage(1); // Reset current page when data changes
-            } catch (error) {
-                console.error('Error fetching episodes:', error);
-            }
+        // Fetch episode sources (post request)
+        const options = {
+          method: 'POST',
+          url: 'https://http-cors-proxy.p.rapidapi.com/',
+          headers: {
+            'x-rapidapi-key': '2e4139dc3fmshfb131a66e36aa23p1bbef1jsncf62aca0e0bd',
+            'x-rapidapi-host': 'http-cors-proxy.p.rapidapi.com',
+            'Content-Type': 'application/json',
+            Origin: 'https://animetstream.vercel.app/',
+            'X-Requested-With': 'https://animetstream.vercel.app/'
+          },
+          data: {
+            url: `https://anime-brown-three.vercel.app/api/v2/hianime/episode/sources?animeEpisodeId=${episodeData[0].episodeId}&server=hd-1&category=dub`
+          }
         };
 
-        fetchEpisodes();
-    }, []); // Dependency array includes animeId
+        const response2 = await axios.request(options);
+        console.log(response2.data);
+
+        const videoUrl = "https://hianime-proxy-omega.vercel.app/m3u8-proxy?url=" + response2.data.data.sources[0].url;
+        console.log("Video URL: ", videoUrl);
+
+        if (Hls.isSupported()) {
+          hls = new Hls();
+          hlsRef.current = hls;
+          hls.loadSource(videoUrl);
+          hls.attachMedia(videoRef.current);
+          setSpinner(false);
+        } else {
+          // Fallback to native video if HLS is not supported
+          if (videoRef.current) {
+            videoRef.current.style.display = "block";
+            videoRef.current.src = videoUrl;
+            videoRef.current.play().catch(err => {
+              console.error("Error trying to play the video (native):", err);
+            });
+            setSpinner(false);
+          }
+        }
+      } catch (error) {
+        console.error('Error fetching episodes or video sources:', error);
+      }
+    };
+
+    fetchEpisodes();
+
+    // Cleanup: Destroy HLS instance if present when the component unmounts
+    return () => {
+      hls.destroy();
+    };
+  }, [animeId]); // Dependency array includes animeId
  
   useEffect(() => {
     if (totalEpisodes > 0) {
@@ -277,16 +232,30 @@ const fetchEpisodeSources = async (episodeId) => {
 	setSpinner(true)
 	console.log(episodeId)	
 	try {
-      const response = await axios.post('https://http-cors-proxy.p.rapidapi.com/', {
+    const options = {
+      method: 'POST',
+      url: 'https://http-cors-proxy.p.rapidapi.com/',
+      headers: {
+        'x-rapidapi-key': '2e4139dc3fmshfb131a66e36aa23p1bbef1jsncf62aca0e0bd',
+        'x-rapidapi-host': 'http-cors-proxy.p.rapidapi.com',
+        'Content-Type': 'application/json',
+        Origin: 'https://animetstream.vercel.app/',
+        'X-Requested-With': 'https://animetstream.vercel.app/'
+      },
+      data: {
         url: `https://anime-brown-three.vercel.app/api/v2/hianime/episode/sources?animeEpisodeId=${episodeId}&server=hd-1&category=dub`
-      });
-      const videoUrl = "https://hianime-proxy-omega.vercel.app/m3u8-proxy?url=" + response.data.data.sources[0].url;
+      }
+    }
+const response2 = await axios.request(options);
+console.log(response2.data);
+      const videoUrl = "https://hianime-proxy-omega.vercel.app/m3u8-proxy?url=" + response2.data.data.sources[0].url;
 
       if (Hls.isSupported()) {
-        hls = new Hls();
+        let hls = new Hls();
         hls.loadSource(videoUrl);
         hls.attachMedia(videoRef.current);
         setSpinner(false);
+        
       } else {
         // Fallback to native video
         if (videoRef.current) {
