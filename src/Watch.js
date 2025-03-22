@@ -170,7 +170,7 @@ setSpinner(false)
     }
   }, [totalEpisodes,animeId,currentPage,startIndex,endIndex]);
 
- useEffect(() => {
+ useEffect(async () => {
 	 setSpinner(true)
      const options = {
               method: 'POST',
