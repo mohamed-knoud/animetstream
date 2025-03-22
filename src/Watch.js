@@ -43,10 +43,19 @@ const Watch = forwardRef((props, ref) => {
 
     }
   },[isLoading])
-
-  useEffect(()=>{
-    
-  },[])
+const fetchStreaming = async () => {
+            try {
+                const response = await ;
+                console.log(response.data);
+                setEpisodes(response.data.episodes);
+                setTotalEpisodes(response.data.totalEpisodes);
+                setEpisodeNumber(response.data.episodes[0]?.number); // Optional chaining for safety
+                setCurrentPage(1); // Reset current page when data changes
+            } catch (error) {
+                console.error('Error fetching episodes:', error);
+            }
+        };
+ 
   const spinnerTrue = ()=>{
     setSpinner(true)
   }
@@ -74,10 +83,12 @@ useEffect(() => {
             try {
                 const response = await axios.get(`https://proxy-ryan.vercel.app/cors?url=https://anime-brown-three.vercel.app/api/v2/hianime/anime/${animeId}/episodes`);
                 console.log(response.data);
-                setEpisodes(response.data.episodes);
-                setTotalEpisodes(response.data.totalEpisodes);
-                setEpisodeNumber(response.data.episodes[0]?.number); // Optional chaining for safety
-                setCurrentPage(1); // Reset current page when data changes
+                const response2 = await axios.get(`https://anime-brown-three.vercel.app/api/v2/hianime/episode/sources?animeEpisodeId=${response.data.data.episodes[0].episodeId}&server=hd-1&category=dub`)
+                console.log(response2)  
+                //setEpisodes(response.data.episodes);
+                //setTotalEpisodes(response.data.totalEpisodes);
+                //setEpisodeNumber(response.data.episodes[0]?.number); // Optional chaining for safety
+                //setCurrentPage(1); // Reset current page when data changes
             } catch (error) {
                 console.error('Error fetching episodes:', error);
             }
