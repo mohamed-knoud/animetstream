@@ -108,6 +108,9 @@ useEffect(() => {
 			      const hls = new Hls();
 			      hls.loadSource(response2.data.data.sources[0]);
 			      hls.attachMedia(videoRef.current);
+			      hls.on(Hls.Events.MANIFEST_PARSED,function() {
+				    video.play();
+				});
 		    }
 		
 		    // If Hls is not supported, fall back to native video element
