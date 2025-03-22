@@ -45,7 +45,7 @@ const Watch = forwardRef((props, ref) => {
   },[isLoading])
 useEffect(async ()=>{
     let res = await axios.get(`https://proxy-ryan.vercel.app/cors?url=https://anime-brown-three.vercel.app/api/v2/hianime/anime/${animeId}`);
-	console.log(res.data)
+	//console.log(res.data)
 	setTitle(res.data.data.anime.info.name)
 	setEpisodeNumber(1)
 },[])
@@ -76,7 +76,7 @@ useEffect(() => {
         const fetchEpisodes = async () => {
             try {
                 response = await axios.get(`https://proxy-ryan.vercel.app/cors?url=https://anime-brown-three.vercel.app/api/v2/hianime/anime/${animeId}/episodes`);
-                console.log(response.data);
+                console.log(response.data.episodes);
 		    setEpisodes(response.data.episodes)
               const options = {
               method: 'POST',
@@ -93,7 +93,7 @@ useEffect(() => {
               }
             };try {
 	const response2 = await axios.request(options);
-	console.log(response2.data);
+	//console.log(response2.data);
 } catch (error) {
 	console.error(error);
 }
