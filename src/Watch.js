@@ -74,13 +74,20 @@ const Watch = forwardRef((props, ref) => {
     
     </>;
   };
+useEffect(()=>{
+  axios.get(`https://proxy-ryan.vercel.app/cors?url=https://consume-mu.vercel.app/anime/gogoanime/watch/${episodeId}`).then(data=>{
+          console.log(data)
+
+          
+        }
+},[])
   useEffect(() => {
     const fetchData = async () => {
 
       await axios.get(`https://proxy-ryan.vercel.app/cors?url=https://anime-brown-three.vercel.app/api/v2/hianime/anime/${animeId}`).then(data=>{
         console.log(data)
-        //setTitle(data.data.title.english)
-        //setAnimeId(data.data.episodes[0].id)
+        setTitle(data.data.data.anime.info.name)
+        setAnimeId(data.data.data.anime.info.id)
         //setEpisodeNumber(data.data.episodes[0].number)
         //setEpisodes(data.data.episodes)
         //settotalEpisodes(data.data.episodes.length)
