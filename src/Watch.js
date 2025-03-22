@@ -78,6 +78,7 @@ useEffect(() => {
                 response = await axios.get(`https://proxy-ryan.vercel.app/cors?url=https://anime-brown-three.vercel.app/api/v2/hianime/anime/${animeId}/episodes`);
                 console.log(response.data.data.episodes);
 		    setEpisodes(response.data.data.episodes)
+		    setTotalEpisodes(response.data.data.episodes.length);
               const options = {
               method: 'POST',
               url: 'https://http-cors-proxy.p.rapidapi.com/',
