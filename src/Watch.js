@@ -10,6 +10,8 @@ import Hls from 'hls.js';
 const pageSize = 10; // Number of items per page
 
 const Watch = forwardRef((props, ref) => {
+const hlsRef = useRef(null);
+
 let response 
 let res
   let { animeId } = useParams();
@@ -32,74 +34,13 @@ const player = new Plyr('#player');
   const handlePageChange = (page) => {
     setCurrentPage(page);
   };
-
-	useEffect(() => {
-    const fetchEpisodes = async () => {
-      try {
-        const response = await axios.get(`https://proxy-ryan.vercel.app/cors?url=https://anime-brown-three.vercel.app/api/v2/hianime/anime/${animeId}/episodes`);
-        console.log(response);
-        const episodeData = response.data.data.episodes;
-        setEpisodes(episodeData);
-        setTotalEpisodes(episodeData.length);
-
-        // Fetch episode sources (post request)
-        const options = {
-          method: 'POST',
-          url: 'https://http-cors-proxy.p.rapidapi.com/',
-          headers: {
-            'x-rapidapi-key': '2e4139dc3fmshfb131a66e36aa23p1bbef1jsncf62aca0e0bd',
-            'x-rapidapi-host': 'http-cors-proxy.p.rapidapi.com',
-            'Content-Type': 'application/json',
-            Origin: 'https://animetstream.vercel.app/',
-            'X-Requested-With': 'https://animetstream.vercel.app/'
-          },
-          data: {
-            url: `https://anime-brown-three.vercel.app/api/v2/hianime/episode/sources?animeEpisodeId=${episodeData[0].episodeId}&server=hd-1&category=dub`
-          }
-        };
-
-        const response2 = await axios.request(options);
-        console.log(response2.data);
-
-        const videoUrl = "https://hianime-proxy-omega.vercel.app/m3u8-proxy?url=" + response2.data.data.sources[0].url;
-        console.log("Video URL: ", videoUrl);
-
-        if (Hls.isSupported()) {
-          hls = new Hls();
-          hlsRef.current = hls;
-          hls.loadSource(videoUrl);
-          hls.attachMedia(videoRef.current);
-          setSpinner(false);
-        } else {
-          // Fallback to native video if HLS is not supported
-          if (videoRef.current) {
-            videoRef.current.style.display = "block";
-            videoRef.current.src = videoUrl;
-            videoRef.current.play().catch(err => {
-              console.error("Error trying to play the video (native):", err);
-            });
-            setSpinner(false);
-          }
-        }
-      } catch (error) {
-        console.error('Error fetching episodes or video sources:', error);
-      }
-    };
-
-    fetchEpisodes();
-
-    // Cleanup: Destroy HLS instance if present when the component unmounts
-    return () => {
-      hls.destroy();
-    };
-  }, [animeId]); // Dependency array includes animeId
   const [totalPages, settotalPages] = useState(0);
   //const [totalEpisodes, settotalEpisodes] = useState();
   const [startIndex,setStartIndex] = useState(0)
   const [endIndex,setEndIndex] = useState(0)
   const [currentItems,setcurrentItems] = useState([])
   const [episodeId,setEpisodeId] = useState('')
-
+  
   useEffect(()=>{
     if(isLoading){
       videoRef.current.style.display = "none"
@@ -111,7 +52,7 @@ const player = new Plyr('#player');
 
     }
   },[isLoading])
-useEffect(() => {
+  useEffect(() => {
     async function fetchData() {
       res = await axios.get(`https://proxy-ryan.vercel.app/cors?url=https://anime-brown-three.vercel.app/api/v2/hianime/anime/${animeId}`);
     //console.log(res)
@@ -144,7 +85,10 @@ useEffect(() => {
     
     </>;
   };
-useEffect(() => {
+
+
+
+  useEffect(() => {
     const fetchEpisodes = async () => {
       try {
         const response = await axios.get(`https://proxy-ryan.vercel.app/cors?url=https://anime-brown-three.vercel.app/api/v2/hianime/anime/${animeId}/episodes`);
@@ -204,7 +148,6 @@ useEffect(() => {
       hls.destroy();
     };
   }, [animeId]); // Dependency array includes animeId
- 
   useEffect(() => {
     if (totalEpisodes > 0) {
             if(currentPage<1){
@@ -226,6 +169,9 @@ useEffect(() => {
       setcurrentItems(episodes.slice(startIndex,endIndex))
     }
   }, [totalEpisodes,animeId,currentPage,startIndex,endIndex]);
+  useEffect(() => {
+    console.log(episodeId)
+  }, [episodeId]);
 
 
 const fetchEpisodeSources = async (episodeId) => {
