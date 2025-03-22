@@ -89,10 +89,11 @@ const player = new Plyr('#player');
 
 
   useEffect(() => {
+    let hls
     const fetchEpisodes = async () => {
       try {
         const response = await axios.get(`https://proxy-ryan.vercel.app/cors?url=https://anime-brown-three.vercel.app/api/v2/hianime/anime/${animeId}/episodes`);
-        console.log(response);
+        //console.log(response);
         const episodeData = response.data.data.episodes;
         setEpisodes(episodeData);
         setTotalEpisodes(episodeData.length);
@@ -109,15 +110,15 @@ const player = new Plyr('#player');
             'X-Requested-With': 'https://animetstream.vercel.app/'
           },
           data: {
-            url: `https://anime-brown-three.vercel.app/api/v2/hianime/episode/sources?animeEpisodeId=${episodeData[0].episodeId}&server=hd-1&category=dub`
+            url: `https://anime-brown-three.vercel.app/api/v2/hianime/episode/sources?animeEpisodeId=${episodeData[0].episodeId}&server=hd-1&category=sub`
           }
         };
 
         const response2 = await axios.request(options);
-        console.log(response2.data);
+        //console.log(response2.data);
 
         const videoUrl = "https://hianime-proxy-omega.vercel.app/m3u8-proxy?url=" + response2.data.data.sources[0].url;
-        console.log("Video URL: ", videoUrl);
+        //console.log("Video URL: ", videoUrl);
 
         if (Hls.isSupported()) {
           hls = new Hls();
@@ -170,13 +171,13 @@ const player = new Plyr('#player');
     }
   }, [totalEpisodes,animeId,currentPage,startIndex,endIndex]);
   useEffect(() => {
-    console.log(episodeId)
+    //console.log(episodeId)
   }, [episodeId]);
 
 
 const fetchEpisodeSources = async (episodeId) => {
 	setSpinner(true)
-	console.log(episodeId)	
+	//console.log(episodeId)	
 	try {
     const options = {
       method: 'POST',
@@ -189,11 +190,11 @@ const fetchEpisodeSources = async (episodeId) => {
         'X-Requested-With': 'https://animetstream.vercel.app/'
       },
       data: {
-        url: `https://anime-brown-three.vercel.app/api/v2/hianime/episode/sources?animeEpisodeId=${episodeId}&server=hd-1&category=dub`
+        url: `https://anime-brown-three.vercel.app/api/v2/hianime/episode/sources?animeEpisodeId=${episodeId}&server=hd-1&category=sub`
       }
     }
 const response2 = await axios.request(options);
-console.log(response2.data);
+//console.log(response2.data);
       const videoUrl = "https://hianime-proxy-omega.vercel.app/m3u8-proxy?url=" + response2.data.data.sources[0].url;
 
       if (Hls.isSupported()) {
@@ -258,7 +259,7 @@ console.log(response2.data);
     {
   currentItems.length > 0 ? (
     currentItems.map((episode) => (
-      <div key={episode.id} onClick={()=>{console.log(episode.episodeId);setEpisodeId(episode.id);setEpisodeNumber(episode.number);}} style={{display:'flex',flexDirection:'column'}}>
+      <div key={episode.id} onClick={()=>{fetchEpisodeSources(episode.episodeId);setEpisodeId(episode.id);setEpisodeNumber(episode.number);}} style={{display:'flex',flexDirection:'column'}}>
       <img style={{cursor:'pointer',borderRadius:'10px',marginRight:'15px',width:'150px',aspectRatio:'16/9',objectFit:'cover'}} src={poster} alt={episode.title ? episode.title:""} /><span style={{alignSelf:'start',color:'white'}}>{episode.title ? (episode.title.length>19 ? episode.title.slice(0, 16)+'...':episode.title) : "Episode "+episode.number}</span>
 	</div>
     ))
