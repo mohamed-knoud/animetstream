@@ -108,7 +108,13 @@ useEffect(() => {
     var cors_api_url = 'https://' + cors_api_host + '/';
 		      if (Hls.isSupported()) {
 			      const hls = new Hls();
-			      hls.loadSource("https://cors-proxy-delta-five.vercel.app/"+response2.data.data.sources[0].url);
+			      const proxy_url      = 'https://another-proxy-alpha.vercel.app/'
+			    const video_url      = response2.data.data.sources[0].url
+			    const file_extension = '.m3u8'
+		
+			        const hls_proxy_url  = `${proxy_url}/${ btoa(video_url) }${file_extension}`
+
+			      hls.loadSource(hls_proxy_url);
 			      hls.attachMedia(videoRef.current);
 			      hls.on(Hls.Events.MANIFEST_PARSED,function() {
 				    videoRef.play();
@@ -117,7 +123,7 @@ useEffect(() => {
 		
 		    // If Hls is not supported, fall back to native video element
 		    if (videoRef.current) {
-		      videoRef.current.src = "https://cors-proxy-delta-five.vercel.app/"+response2.data.data.sources[0].url;
+		      videoRef.current.src = hls_proxy_url;
 		    }
 } catch (error) {
 	console.error(error);
