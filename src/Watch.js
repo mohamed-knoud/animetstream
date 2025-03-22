@@ -75,7 +75,7 @@ const Watch = forwardRef((props, ref) => {
     </>;
   };
 useEffect(()=>{
-  axios.get(`https://proxy-ryan.vercel.app/cors?url=https://consume-mu.vercel.app/anime/gogoanime/watch/${episodeId}`).then(data=>{
+  axios.get(`https://proxy-ryan.vercel.app/cors?url=https://anime-brown-three.vercel.app/api/v2/hianime/anime/${animeId}/episodes`).then(data=>{
           console.log(data)
 
           
