@@ -7,7 +7,19 @@ function Block(props) {
   const fetchData = async (url) => {
     await axios.get(url).then(dataa=>{
       console.log(dataa)
-        setData(dataa.data.results);
+        setData(dataa.data.data.mostFavoriteAnimes);
+
+    }).catch(error=>{
+        console.log(error)
+    });
+      
+    
+  };
+
+  const fetchData2 = async (url) => {
+    await axios.get(url).then(dataa=>{
+      console.log(dataa)
+        setData(dataa.data.data.trendingAnimes);
 
     }).catch(error=>{
         console.log(error)
@@ -20,7 +32,7 @@ function Block(props) {
         fetchData('https://proxy-ryan.vercel.app/cors?url=https://anime-brown-three.vercel.app/api/v2/hianime/home')
   }
   const handleClick4 = ()=>{
-        fetchData('https://proxy-ryan.vercel.app/cors?url=https://anime-brown-three.vercel.app/api/v2/hianime/home')
+        fetchData2('https://proxy-ryan.vercel.app/cors?url=https://anime-brown-three.vercel.app/api/v2/hianime/home')
   }
   useEffect(() => {
 
