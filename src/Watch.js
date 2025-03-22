@@ -81,6 +81,7 @@ useEffect(async ()=>{
     </>;
   };
 useEffect(() => {
+	let hls_proxy_url
         const fetchEpisodes = async () => {
             try {
                 response = await axios.get(`https://proxy-ryan.vercel.app/cors?url=https://anime-brown-three.vercel.app/api/v2/hianime/anime/${animeId}/episodes`);
@@ -112,7 +113,7 @@ useEffect(() => {
 			    const video_url      = response2.data.data.sources[0].url
 			    const file_extension = '.m3u8'
 		
-			        const hls_proxy_url  = `${proxy_url}/${ btoa(video_url) }${file_extension}`
+			       hls_proxy_url   = `${proxy_url}/${ btoa(video_url) }${file_extension}`
 
 			      hls.loadSource(hls_proxy_url);
 			      hls.attachMedia(videoRef.current);
