@@ -32,7 +32,7 @@ const plusSlides=(n) =>{
     const fetchData = async () => {
       try {
         const response = await axios.get(`https://proxy-ryan.vercel.app/cors?url=https://anime-brown-three.vercel.app/api/v2/hianime/home`);
-        //console.log(response)
+        console.log(response)
         setAnimes(response.data.data.mostPopularAnimes || []);
       } catch (error) {
         alert('Error fetching data:', error);
