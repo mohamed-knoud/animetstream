@@ -170,9 +170,8 @@ setSpinner(false)
     }
   }, [totalEpisodes,animeId,currentPage,startIndex,endIndex]);
 
-useEffect(() => {
-  let hls;
-  const fetchEpisodeSources = async () => {
+
+const fetchEpisodeSources = async (episodeId) => {
     try {
       const response = await axios.post('https://http-cors-proxy.p.rapidapi.com/', {
         url: `https://anime-brown-three.vercel.app/api/v2/hianime/episode/sources?animeEpisodeId=${episodeId}&server=hd-1&category=dub`
@@ -196,15 +195,6 @@ useEffect(() => {
     }
   };
 
-  fetchEpisodeSources();
-
-  return () => {
-    // Cleanup HLS instance on component unmount
-    if (hls) {
-      hls.destroy();
-    }
-  };
-}, [episodeId]);
 
 
     const [visible,setVisible] = useState(true)
@@ -249,7 +239,7 @@ useEffect(() => {
     {
   currentItems.length > 0 ? (
     currentItems.map((episode) => (
-      <div key={episode.id} onClick={()=>{fetchEpisodeSources();setEpisodeId(episode.id);setEpisodeNumber(episode.number);}} style={{display:'flex',flexDirection:'column'}}>
+      <div key={episode.id} onClick={()=>{fetchEpisodeSources(episode.id);setEpisodeId(episode.id);setEpisodeNumber(episode.number);}} style={{display:'flex',flexDirection:'column'}}>
       <img style={{cursor:'pointer',borderRadius:'10px',marginRight:'15px',width:'150px',aspectRatio:'16/9',objectFit:'cover'}} src={poster} alt={episode.title ? episode.title:""} /><span style={{alignSelf:'start',color:'white'}}>{episode.title ? (episode.title.length>19 ? episode.title.slice(0, 16)+'...':episode.title) : "Episode "+episode.number}</span>
 	</div>
     ))
