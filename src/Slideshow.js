@@ -31,7 +31,7 @@ const plusSlides=(n) =>{
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`https://consume-mu.vercel.app/meta/anilist/popular`);
+        const response = await axios.get(`https://anime-brown-three.vercel.app/api/v2/hianime/home`);
         
         setAnimes(response.data.results || []);
       } catch (error) {
