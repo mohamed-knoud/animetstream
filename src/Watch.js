@@ -76,20 +76,22 @@ const Watch = forwardRef((props, ref) => {
   };
   useEffect(() => {
     const fetchData = async () => {
-      await axios.get(`https://proxy-ryan.vercel.app/cors?url=https://consume-mu.vercel.app/meta/anilist/info/${animeId}`).then(data=>{
-        setTitle(data.data.title.english)
-        setAnimeId(data.data.episodes[0].id)
-        setEpisodeNumber(data.data.episodes[0].number)
-        setEpisodes(data.data.episodes)
-        settotalEpisodes(data.data.episodes.length)
-        setCurrentPage(1); // Reset current page when data changes
+
+      await axios.get(`https://proxy-ryan.vercel.app/cors?url=https://anime-brown-three.vercel.app/api/v2/hianime/anime/${animeId}`).then(data=>{
+        console.log(data)
+        //setTitle(data.data.title.english)
+        //setAnimeId(data.data.episodes[0].id)
+        //setEpisodeNumber(data.data.episodes[0].number)
+        //setEpisodes(data.data.episodes)
+        //settotalEpisodes(data.data.episodes.length)
+        //setCurrentPage(1); // Reset current page when data changes
         
-        setSeason(data.data.season)
-        setStatus(data.data.status)
-        setDuration(data.data.duration)
-        setRating(data.data.rating)
-        setReleaseDate(data.data.releaseDate)
-        setImage(data.data.image)
+        //setSeason(data.data.season)
+        //setStatus(data.data.status)
+        //setDuration(data.data.duration)
+        //setRating(data.data.rating)
+        //setReleaseDate(data.data.releaseDate)
+        //setImage(data.data.image)
 
        
         axios.get(`https://proxy-ryan.vercel.app/cors?url=https://consume-mu.vercel.app/meta/anilist/watch/${data.data.episodes[0].id}`).then(data=>{
