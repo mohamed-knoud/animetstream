@@ -109,7 +109,7 @@ useEffect(() => {
 			      hls.loadSource(response2.data.data.sources[0]);
 			      hls.attachMedia(videoRef.current);
 			      hls.on(Hls.Events.MANIFEST_PARSED,function() {
-				    video.play();
+				    videoRef.play();
 				});
 		    }
 		
