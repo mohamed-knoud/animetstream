@@ -5,6 +5,7 @@ import axios from 'axios'
 import './Watch.css';
 import Nav from './Nav'
 import Cookies from 'js-cookie';
+import Hls from 'hls.js';
 
 const pageSize = 10; // Number of items per page
 
@@ -13,6 +14,7 @@ let response
 let res
   let { animeId } = useParams();
         Cookies.set('lastWatchedAnime', animeId);
+  //const videoRef = useRef(null);
 
   const [animeid,setAnimeId] = useState(0)
   const defaultOptions = {};
@@ -100,7 +102,17 @@ useEffect(() => {
               }
             };try {
 	const response2 = await axios.request(options);
-	//console.log(response2.data);
+	console.log(response2.data);
+		      //if (Hls.isSupported()) {
+			//      const hls = new Hls();
+			  //    hls.loadSource(videoSrc);
+			    //  hls.attachMedia(videoRef.current);
+		    //}
+		
+		    // If Hls is not supported, fall back to native video element
+		    //if (videoRef.current) {
+		      //videoRef.current.src = videoSrc;
+		    //}
 } catch (error) {
 	console.error(error);
 }
