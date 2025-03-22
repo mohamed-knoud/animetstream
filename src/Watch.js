@@ -43,7 +43,10 @@ const Watch = forwardRef((props, ref) => {
 
     }
   },[isLoading])
-
+useEffect(async ()=>{
+    let res = await axios.get(`https://proxy-ryan.vercel.app/cors?url=https://anime-brown-three.vercel.app/api/v2/hianime/anime/${animeId}`);
+	console.log(res.data)  
+},[])
  
   const spinnerTrue = ()=>{
     setSpinner(true)
