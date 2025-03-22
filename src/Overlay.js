@@ -11,10 +11,10 @@ function Overlay(props) {
 
  
   useEffect(() => {
-    axios.get(`https://consume-mu.vercel.app/anime/gogoanime/${query}`)
+    axios.get(`https://proxy-ryan.vercel.app/cors?url=https://anime-brown-three.vercel.app/api/v2/hianime/search?q=${query}`)
       .then(response => {
-        // console.log(response.data.results);
-        setAnimes(response.data.results || []) 
+        console.log(response.data);
+        //setAnimes(response.data.results || []) 
       })
       .catch(error => {
         console.error('Error fetching data:', error); // Logging the error if fetching fails
