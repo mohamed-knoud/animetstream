@@ -74,16 +74,7 @@ const Watch = forwardRef((props, ref) => {
     
     </>;
   };
-useEffect(()=>{
-  axios.get(`https://proxy-ryan.vercel.app/cors?url=https://anime-brown-three.vercel.app/api/v2/hianime/anime/${animeId}/episodes`).then(data=>{
-          console.log(data)
-        //setEpisodeNumber(data.data.episodes[0].number) 
-    //setEpisodes(data.data.episodes) 
-    //settotalEpisodes(data.data.episodes.length) 
-    //setCurrentPage(1); // Reset current page when data changes
-          
-        
-},[])
+
   useEffect(() => {
     const fetchData = async () => {
 
