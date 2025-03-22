@@ -92,7 +92,7 @@ useEffect(() => {
 	console.error(error);
 }
                 
-                console.log(response2)  
+               // console.log(response2)  
                 //setEpisodes(response.data.episodes);
                 //setTotalEpisodes(response.data.totalEpisodes);
                 //setEpisodeNumber(response.data.episodes[0]?.number); // Optional chaining for safety
