@@ -172,6 +172,7 @@ setSpinner(false)
 
 
 const fetchEpisodeSources = async (episodeId) => {
+	setSpinner(true)
     try {
       const response = await axios.post('https://http-cors-proxy.p.rapidapi.com/', {
         url: `https://anime-brown-three.vercel.app/api/v2/hianime/episode/sources?animeEpisodeId=${episodeId}&server=hd-1&category=dub`
