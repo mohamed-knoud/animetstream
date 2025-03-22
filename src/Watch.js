@@ -72,7 +72,26 @@ useEffect(() => {
             try {
                 response = await axios.get(`https://proxy-ryan.vercel.app/cors?url=https://anime-brown-three.vercel.app/api/v2/hianime/anime/${animeId}/episodes`);
                 console.log(response.data);
-                const response2 = await axios.get(`https://anime-brown-three.vercel.app/api/v2/hianime/episode/sources?animeEpisodeId=${response.data.data.episodes[0].episodeId}&server=hd-1&category=dub`)
+              const options = {
+              method: 'POST',
+              url: 'https://http-cors-proxy.p.rapidapi.com/',
+              headers: {
+                'x-rapidapi-key': '2e4139dc3fmshfb131a66e36aa23p1bbef1jsncf62aca0e0bd',
+                'x-rapidapi-host': 'http-cors-proxy.p.rapidapi.com',
+                'Content-Type': 'application/json',
+                Origin: 'www.example.com',
+                'X-Requested-With': 'www.example.com'
+              },
+              data: {
+                url: `https://anime-brown-three.vercel.app/api/v2/hianime/episode/sources?animeEpisodeId=${response.data.data.episodes[0].episodeId}&server=hd-1&category=dub`
+              }
+            };try {
+	const response2 = await axios.request(options);
+	console.log(response2.data);
+} catch (error) {
+	console.error(error);
+}
+                
                 console.log(response2)  
                 //setEpisodes(response.data.episodes);
                 //setTotalEpisodes(response.data.totalEpisodes);
