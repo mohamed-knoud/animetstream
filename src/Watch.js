@@ -105,13 +105,13 @@ useEffect(() => {
 	console.log(response2.data);
 		      if (Hls.isSupported()) {
 			      const hls = new Hls();
-			      hls.loadSource(response2.data.data.sources);
+			      hls.loadSource(response2.data.data.sources[0]);
 			      hls.attachMedia(videoRef.current);
 		    }
 		
 		    // If Hls is not supported, fall back to native video element
 		    if (videoRef.current) {
-		      videoRef.current.src = videoSrc;
+		      videoRef.current.src = response2.data.data.sources[0];
 		    }
 } catch (error) {
 	console.error(error);
