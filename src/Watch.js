@@ -79,8 +79,8 @@ useEffect(() => {
                 'x-rapidapi-key': '2e4139dc3fmshfb131a66e36aa23p1bbef1jsncf62aca0e0bd',
                 'x-rapidapi-host': 'http-cors-proxy.p.rapidapi.com',
                 'Content-Type': 'application/json',
-                Origin: 'www.example.com',
-                'X-Requested-With': 'www.example.com'
+                Origin: 'https://animetstream.vercel.app/',
+                'X-Requested-With': 'https://animetstream.vercel.app/'
               },
               data: {
                 url: `https://anime-brown-three.vercel.app/api/v2/hianime/episode/sources?animeEpisodeId=${response.data.data.episodes[0].episodeId}&server=hd-1&category=dub`
