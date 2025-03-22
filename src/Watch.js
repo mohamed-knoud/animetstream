@@ -109,7 +109,7 @@ useEffect(() => {
 			      hls.attachMedia(videoRef.current);
 		    }
 		
-		     If Hls is not supported, fall back to native video element
+		    // If Hls is not supported, fall back to native video element
 		    if (videoRef.current) {
 		      videoRef.current.src = videoSrc;
 		    }
