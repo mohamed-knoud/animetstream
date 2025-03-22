@@ -31,16 +31,7 @@ const Watch = forwardRef((props, ref) => {
   const [endIndex,setEndIndex] = useState(0)
   const [currentItems,setcurrentItems] = useState([])
   const [episodeId,setEpisodeId] = useState('')
-  const [image,setImage] = useState("")
-  const [rank,setRank] = useState("")
-  const [duration,setDuration] = useState("")
-  const [score,setScore] = useState("")
-  const [studios,setStudios] = useState("")
-  const [status,setStatus] = useState("")
-  const [Season,setSeason] = useState("")
-  const [releaseDate,setReleaseDate] = useState("")
-  const [rating,setRating] = useState("")
-  const [broadcast,setBroadcast] = useState("")
+  
   useEffect(()=>{
     if(isLoading){
       videoRef.current.style.display = "none"
@@ -52,6 +43,10 @@ const Watch = forwardRef((props, ref) => {
 
     }
   },[isLoading])
+
+  useEffect(()=>{
+    
+  },[])
   const spinnerTrue = ()=>{
     setSpinner(true)
   }
@@ -90,228 +85,7 @@ useEffect(() => {
 
         fetchEpisodes();
     }, []); // Dependency array includes animeId
-  useEffect(() => {
-    const fetchData = async () => {
-
-      await axios.get(`https://proxy-ryan.vercel.app/cors?url=https://anime-brown-three.vercel.app/api/v2/hianime/anime/${animeId}`).then(data=>{
-        console.log(data)
-        setTitle(data.data.data.anime.info.name)
-        setAnimeId(data.data.data.anime.info.id)
-        //setEpisodeNumber(data.data.episodes[0].number)
-        //setEpisodes(data.data.episodes)
-        //settotalEpisodes(data.data.episodes.length)
-        //setCurrentPage(1); // Reset current page when data changes
-        
-        //setSeason(data.data.season)
-        //setStatus(data.data.status)
-        //setDuration(data.data.duration)
-        //setRating(data.data.rating)
-        //setReleaseDate(data.data.releaseDate)
-        //setImage(data.data.image)
-
-       
-        axios.get(`https://proxy-ryan.vercel.app/cors?url=https://consume-mu.vercel.app/meta/anilist/watch/${data.data.episodes[0].id}`).then(data=>{
-        console.log(data)
-          
-          if (window.Hls.isSupported()) {
-            if(window.hls) {
-              window.hls.destroy();
-            }
-            const hls = new window.Hls();
-            hls.loadSource("https://proxy-ryan.vercel.app/cors?url="+data.data.sources[2].url);
-            
-            
-           
-            hls.on(window.Hls.Events.MANIFEST_PARSED, function(event, data) {
-              const availableQualities = hls.levels.map((l)=>l.height)
-              defaultOptions.controls = [
-                'play-large', // The large play button in the center   
-                'play', // Play/pause playback   
-                'fast-forward', // Fast forward by the seek time (default 10 seconds)    
-                'progress', // The progress bar and scrubber for playback and buffering    
-                'current-time', // The current time of playback    
-                'duration', // The full duration of the media    
-                'mute', // Toggle mute    
-                'volume', // Volume control    
-                'settings', // Settings menu    
-                'pip', // Picture-in-picture (currently Safari only)    
-                'fullscreen', // Toggle fullscreen
-              ]
-              // Assuming you want to start playing the first quality level
-              defaultOptions.quality = {
-                default :availableQualities[0],
-                option:availableQualities,
-                forced : true,
-                onChange: (e) => updateQuality(e)
-              }
-  
-              new Plyr(videoRef.current,defaultOptions); 
-              setSpinner(false)
-           
-            });
-          
-            hls.attachMedia(videoRef.current);
-            window.hls= hls;
-          }
-          function updateQuality(newQuality){
-            window.hls.levels.forEach((level,levelIndex)=>{
-              if(level.height===newQuality ){
-                window.hls.currentLevel = levelIndex
-              }
-            })
-        }
-  
-        }).catch(error=>{
-          // alert(error)
-        })
-       
-      }).catch(error=>{
-        // alert(error)
-        axios.get(`https://consume-mu.vercel.app/anime/gogoanime/info/${animeId}`).then(data=>{
-        console.log(data)
-        setAnimeId(data.data.id)
-        setTitle(data.data.title)
-        setAnimeId(data.data.episodes[0].id)
-        setEpisodeNumber(data.data.episodes[0].number)
-        setEpisodes(data.data.episodes)
-        settotalEpisodes(data.data.totalEpisodes)
-        setCurrentPage(1); // Reset current page when data changes
-        setImage(data.data.image)
-        setSeason(data.data.season)
-        setStatus(data.data.status)
-        setDuration(data.data.duration)
-        setRating(data.data.rating)
-        setReleaseDate(data.data.releaseDate)
-        axios.get(`https://proxy-ryan.vercel.app/cors?url=https://consume-mu.vercel.app/anime/gogoanime/watch/${data.data.episodes[0].id}`).then(data=>{
-          
-
-          if (window.Hls.isSupported()) {
-            if(window.hls) {
-              window.hls.destroy();
-            }
-            const hls = new window.Hls();
-            hls.loadSource("https://proxy-ryan.vercel.app/cors?url="+data.data.sources[2].url);
-
-            
-            
-            hls.on(window.Hls.Events.MANIFEST_PARSED, function(event, data) {
-              const availableQualities = hls.levels.map((l)=>l.height)
-              defaultOptions.controls = [
-                'play-large', // The large play button in the center   
-                'play', // Play/pause playback   
-                'fast-forward', // Fast forward by the seek time (default 10 seconds)    
-                'progress', // The progress bar and scrubber for playback and buffering    
-                'current-time', // The current time of playback    
-                'duration', // The full duration of the media    
-                'mute', // Toggle mute    
-                'volume', // Volume control    
-                'settings', // Settings menu    
-                'pip', // Picture-in-picture (currently Safari only)    
-                'fullscreen', // Toggle fullscreen
-              ]
-              // Assuming you want to start playing the first quality level
-              defaultOptions.quality = {
-                default :availableQualities[0],
-                option:availableQualities,
-                forced : true,
-                onChange: (e) => updateQuality(e)
-              }
-  
-              new Plyr(videoRef.current,defaultOptions); 
-              setSpinner(false)
-           
-            });
-          
-            hls.attachMedia(videoRef.current);
-            window.hls= hls;
-  
-          }
-          function updateQuality(newQuality){
-            window.hls.levels.forEach((level,levelIndex)=>{
-              if(level.height===newQuality ){
-                window.hls.currentLevel = levelIndex
-              }
-            })
-        }
-  
-        }).catch(error=>{
-          // alert(error)
-        })
-        }).catch(error=>{
-          // alert(error)
-        })
-      })
-      
-    };
-
-    // Call the function to fetch data
-    fetchData();
-
-    
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [animeId,totalEpisodes]);
-
-
-  useEffect(() => {
-    setSpinner(true)
-
-    axios.get(`https://proxy-ryan.vercel.app/cors?url=https://consume-mu.vercel.app/anime/gogoanime/watch/${episodeId}`).then(data=>{
-          
-
-          if (window.Hls.isSupported()) {
-            if(window.hls) {
-              window.hls.destroy();
-            }
-            const hls = new window.Hls();
-            hls.loadSource("https://proxy-ryan.vercel.app/cors?url="+data.data.sources[3].url);
-
-            
-            
-            hls.on(window.Hls.Events.MANIFEST_PARSED, function(event, data) {
-              const availableQualities = hls.levels.map((l)=>l.height)
-              defaultOptions.controls = [
-                'play-large', // The large play button in the center   
-                'play', // Play/pause playback   
-                'fast-forward', // Fast forward by the seek time (default 10 seconds)    
-                'progress', // The progress bar and scrubber for playback and buffering    
-                'current-time', // The current time of playback    
-                'duration', // The full duration of the media    
-                'mute', // Toggle mute    
-                'volume', // Volume control    
-                'settings', // Settings menu    
-                'pip', // Picture-in-picture (currently Safari only)    
-                'fullscreen', // Toggle fullscreen
-              ]
-              // Assuming you want to start playing the first quality level
-              defaultOptions.quality = {
-                default :availableQualities[0],
-                option:availableQualities,
-                forced : true,
-                onChange: (e) => updateQuality(e)
-              }
-  
-              new Plyr(videoRef.current,defaultOptions); 
-              setSpinner(false)
-           
-            });
-          
-            hls.attachMedia(videoRef.current);
-            window.hls= hls;
-  
-          }
-          function updateQuality(newQuality){
-            window.hls.levels.forEach((level,levelIndex)=>{
-              if(level.height===newQuality ){
-                window.hls.currentLevel = levelIndex
-              }
-            })
-        }
-  
-        }).catch(error=>{
-          // alert(error)
-        })
-  }, [episodeId]);
-
+ 
   useEffect(() => {
     if (totalEpisodes > 0) {
             if(currentPage<1){
