@@ -82,7 +82,7 @@ useEffect(()=>{
     //settotalEpisodes(data.data.episodes.length) 
     //setCurrentPage(1); // Reset current page when data changes
           
-        }
+        
 },[])
   useEffect(() => {
     const fetchData = async () => {
