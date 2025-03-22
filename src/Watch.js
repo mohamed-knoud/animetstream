@@ -170,7 +170,53 @@ setSpinner(false)
     }
   }, [totalEpisodes,animeId,currentPage,startIndex,endIndex]);
 
- 
+ useEffect(() => {
+     const options = {
+              method: 'POST',
+              url: 'https://http-cors-proxy.p.rapidapi.com/',
+              headers: {
+                'x-rapidapi-key': '2e4139dc3fmshfb131a66e36aa23p1bbef1jsncf62aca0e0bd',
+                'x-rapidapi-host': 'http-cors-proxy.p.rapidapi.com',
+                'Content-Type': 'application/json',
+                Origin: 'https://animetstream.vercel.app/',
+                'X-Requested-With': 'https://animetstream.vercel.app/'
+              },
+              data: {
+                url: `https://anime-brown-three.vercel.app/api/v2/hianime/episode/sources?animeEpisodeId=${episodeId}&server=hd-1&category=dub`
+              }
+            };try {
+	const response2 = await axios.request(options);
+	console.log(response2.data);
+		      var cors_api_host = 'cors-anywhere.herokuapp.com';
+    var cors_api_url = 'https://' + cors_api_host + '/';
+		     if (Hls.isSupported()) {
+  let hls = new Hls();
+
+  // Log to verify if the URL is being set correctly
+  const videoUrl = "https://hianime-proxy-omega.vercel.app/m3u8-proxy?url=" + response2.data.data.sources[0].url;
+  console.log("Video URL: ", videoUrl);
+
+  hls.loadSource(videoUrl);
+  hls.attachMedia(videoRef.current);
+setSpinner(false)
+} else {
+  // If Hls is not supported, fall back to native video element
+  if (videoRef.current) {
+    const videoUrl = "https://hianime-proxy-omega.vercel.app/m3u8-proxy?url=" + response2.data.data.sources[0].url;
+    console.log("Native video URL: ", videoUrl);
+	setSpinner(false)
+    videoRef.current.style.display = "block"
+    // For better fallback handling, try to autoplay if supported
+    videoRef.current.play().catch(err => {
+      console.error("Error trying to play the video (native):", err);
+    });
+  }
+}
+
+} catch (error) {
+	console.error(error);
+}
+  }, [episodeId]);
 
     const [visible,setVisible] = useState(true)
     const handleClick =()=>{
