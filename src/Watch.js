@@ -109,7 +109,7 @@ useEffect(() => {
     var cors_api_url = 'https://' + cors_api_host + '/';
 		      if (Hls.isSupported()) {
 			      
-		      hls.current = new Hls();
+		      let hls = new Hls();
 
 
 			      hls.loadSource("https://proxies-rust.vercel.app/m3u8-proxy?url="+response2.data.data.sources[0].url);
