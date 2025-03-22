@@ -103,16 +103,16 @@ useEffect(() => {
             };try {
 	const response2 = await axios.request(options);
 	console.log(response2.data);
-		      //if (Hls.isSupported()) {
-			//      const hls = new Hls();
-			  //    hls.loadSource(videoSrc);
-			    //  hls.attachMedia(videoRef.current);
-		    //}
+		      if (Hls.isSupported()) {
+			      const hls = new Hls();
+			      hls.loadSource(response2.data.data.sources);
+			      hls.attachMedia(videoRef.current);
+		    }
 		
-		    // If Hls is not supported, fall back to native video element
-		    //if (videoRef.current) {
-		      //videoRef.current.src = videoSrc;
-		    //}
+		     If Hls is not supported, fall back to native video element
+		    if (videoRef.current) {
+		      videoRef.current.src = videoSrc;
+		    }
 } catch (error) {
 	console.error(error);
 }
