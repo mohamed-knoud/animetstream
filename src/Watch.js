@@ -104,9 +104,11 @@ useEffect(() => {
             };try {
 	const response2 = await axios.request(options);
 	console.log(response2.data);
+		      var cors_api_host = 'cors-anywhere.herokuapp.com';
+    var cors_api_url = 'https://' + cors_api_host + '/';
 		      if (Hls.isSupported()) {
 			      const hls = new Hls();
-			      hls.loadSource(response2.data.data.sources[0].url);
+			      hls.loadSource(cors_api_url+response2.data.data.sources[0].url);
 			      hls.attachMedia(videoRef.current);
 			      hls.on(Hls.Events.MANIFEST_PARSED,function() {
 				    videoRef.play();
@@ -115,7 +117,7 @@ useEffect(() => {
 		
 		    // If Hls is not supported, fall back to native video element
 		    if (videoRef.current) {
-		      videoRef.current.src = response2.data.data.sources[0].url;
+		      videoRef.current.src = cors_api_url+response2.data.data.sources[0].url;
 		    }
 } catch (error) {
 	console.error(error);
