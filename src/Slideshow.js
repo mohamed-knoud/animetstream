@@ -60,8 +60,8 @@ const plusSlides=(n) =>{
         {animep.map((anime,index) => (
         <Link key={anime.id} to={`/Watch/${anime.id}`}><div  ref={(ref) => (slideRefs.current[index] = ref)} className="mySlides fade">
           <div className="numbertext">{index+1} / {animep.length}</div>
-          <img src={anime.cover} style={{ cursor:'pointer', width: '100%' ,height:'300px',objectFit:'cover'}} alt={anime.title.english} />
-          <div className="text">{anime.title.english}</div>
+          <img src={anime.poster} style={{ cursor:'pointer', width: '100%' ,height:'300px',objectFit:'cover'}} alt={anime.name} />
+          <div className="text">{anime.name}</div>
         </div></Link>
       ))}
       <a className="prev" onClick={()=>plusSlides(-1)}>❮</a>
