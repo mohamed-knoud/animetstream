@@ -175,8 +175,8 @@ useEffect(() => {
 
          
 
-	  <video id="my_video_1" className="video-js vjs-default-skin" controls preload="auto" width="640" height="264" data-setup="{}">
-	  <source  ref={videoRef} src="" type="application/x-mpegURL"/>
+	  <video ref={videoRef} controls ">
+	  
 	</video>
          
           <div ref={spinnerRef} className="spinner-container">
