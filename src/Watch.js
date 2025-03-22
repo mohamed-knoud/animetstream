@@ -146,7 +146,7 @@ setSpinner(false)
         };
 
         fetchEpisodes();
-    }, [animeId]); // Dependency array includes animeId
+    }, []); // Dependency array includes animeId
  
   useEffect(() => {
     if (totalEpisodes > 0) {
