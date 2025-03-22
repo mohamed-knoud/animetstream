@@ -11,14 +11,32 @@ function Overlay(props) {
 
  
   useEffect(() => {
-    axios.get(`https://proxy-ryan.vercel.app/cors?url=https://anime-brown-three.vercel.app/api/v2/hianime/search?q=${query}`)
-      .then(response => {
-        console.log(response.data);
-        //setAnimes(response.data.results || []) 
-      })
-      .catch(error => {
-        console.error('Error fetching data:', error); // Logging the error if fetching fails
-      });
+    const fetchSearchResults = async (episodeId) => {
+      
+      //console.log(episodeId)	
+      try {
+    const options = {
+      method: 'POST',
+      url: 'https://http-cors-proxy.p.rapidapi.com/',
+      headers: {
+        'x-rapidapi-key': '2e4139dc3fmshfb131a66e36aa23p1bbef1jsncf62aca0e0bd',
+        'x-rapidapi-host': 'http-cors-proxy.p.rapidapi.com',
+        'Content-Type': 'application/json',
+        Origin: 'https://animetstream.vercel.app/',
+        'X-Requested-With': 'https://animetstream.vercel.app/'
+      },
+      data: {
+        url: `https://anime-brown-three.vercel.app/api/v2/hianime/search?q=${query}`
+      }
+    }
+const response2 = await axios.request(options);
+//console.log(response2.data.data.animes);
+setAnimes(response2.data.data.animes)
+} catch (error) {
+  console.error('Error fetching video sources:', error);
+}}
+
+fetchSearchResults()
   }, [query]);
   return (
     <div id="myOverlay" className="overlay">
@@ -30,11 +48,11 @@ function Overlay(props) {
           
         </div>
         <div id="results">
-        {(query !== "" && animes.length > 0 )? (
+        {(query !== "" && animes && animes!=[] && animes.length > 0 )? (
               animes.map(anime => (
                 <Link key={anime.id} onClick={()=>{props.onclick();props.spinnertrue()}} style={{textDecoration:'none'}} to={`/Watch/${anime.id}`}><div>
-                  <img src={anime.image} style={{witdh:'80px',height:'120px',borderRadius:'50%',objectFit:'cover'}} alt={anime.title}/>
-                  <span>{anime.title.length>20?anime.title.slice(0,19)+'...':anime.title}</span>
+                  <img src={anime.poster} style={{witdh:'80px',height:'120px',borderRadius:'50%',objectFit:'cover'}} alt={anime.name}/>
+                  <span>{anime.name.length>20?anime.name.slice(0,19)+'...':anime.name}</span>
                 </div></Link>
               ))
             ) : (
