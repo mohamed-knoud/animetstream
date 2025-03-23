@@ -153,7 +153,7 @@ const player = new Plyr('#player');
             'X-Requested-With': 'https://animetstream.vercel.app/'
           },
           data: {
-            url: `https://anime-brown-three.vercel.app/api/v2/hianime/episode/sources?animeEpisodeId=${episodeData[0].episodeId}&server=hd-1&category=sub`
+            url: `https://anime-brown-three.vercel.app/api/v2/hianime/episode/sources?animeEpisodeId=${episodeData[0].episodeId}&server=hd-1&category=dub`
           }
         };
 
