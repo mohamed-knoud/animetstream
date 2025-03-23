@@ -10,6 +10,49 @@ import Hls from 'hls.js';
 const pageSize = 10; // Number of items per page
 
 const Watch = forwardRef((props, ref) => {
+
+
+	const fetchEpisodeSources = async (episodeId) => {
+	setSpinner(true)
+	//console.log(episodeId)	
+	try {
+    const options = {
+      method: 'POST',
+      url: 'https://http-cors-proxy.p.rapidapi.com/',
+      headers: {
+        'x-rapidapi-key': '2e4139dc3fmshfb131a66e36aa23p1bbef1jsncf62aca0e0bd',
+        'x-rapidapi-host': 'http-cors-proxy.p.rapidapi.com',
+        'Content-Type': 'application/json',
+        Origin: 'https://animetstream.vercel.app/',
+        'X-Requested-With': 'https://animetstream.vercel.app/'
+      },
+      data: {
+        url: `https://anime-brown-three.vercel.app/api/v2/hianime/episode/sources?animeEpisodeId=${episodeId}&server=hd-1&category=sub`
+      }
+    }
+const response2 = await axios.request(options);
+//console.log(response2.data);
+      const videoUrl = "https://hianime-proxy-omega.vercel.app/m3u8-proxy?url=" + response2.data.data.sources[0].url;
+
+      if (Hls.isSupported()) {
+        let hls = new Hls();
+        hls.loadSource(videoUrl);
+        hls.attachMedia(videoRef.current);
+        setSpinner(false);
+        
+      } else {
+        // Fallback to native video
+        if (videoRef.current) {
+          videoRef.current.src = videoUrl;
+          videoRef.current.play().catch(err => console.error("Error trying to play the video:", err));
+        }
+      }
+    } catch (error) {
+      console.error('Error fetching video sources:', error);
+    }
+  };
+
+	
 const hlsRef = useRef(null);
 
 let response 
@@ -175,45 +218,7 @@ const player = new Plyr('#player');
   }, [episodeId]);
 
 
-const fetchEpisodeSources = async (episodeId) => {
-	setSpinner(true)
-	//console.log(episodeId)	
-	try {
-    const options = {
-      method: 'POST',
-      url: 'https://http-cors-proxy.p.rapidapi.com/',
-      headers: {
-        'x-rapidapi-key': '2e4139dc3fmshfb131a66e36aa23p1bbef1jsncf62aca0e0bd',
-        'x-rapidapi-host': 'http-cors-proxy.p.rapidapi.com',
-        'Content-Type': 'application/json',
-        Origin: 'https://animetstream.vercel.app/',
-        'X-Requested-With': 'https://animetstream.vercel.app/'
-      },
-      data: {
-        url: `https://anime-brown-three.vercel.app/api/v2/hianime/episode/sources?animeEpisodeId=${episodeId}&server=hd-1&category=sub`
-      }
-    }
-const response2 = await axios.request(options);
-//console.log(response2.data);
-      const videoUrl = "https://hianime-proxy-omega.vercel.app/m3u8-proxy?url=" + response2.data.data.sources[0].url;
 
-      if (Hls.isSupported()) {
-        let hls = new Hls();
-        hls.loadSource(videoUrl);
-        hls.attachMedia(videoRef.current);
-        setSpinner(false);
-        
-      } else {
-        // Fallback to native video
-        if (videoRef.current) {
-          videoRef.current.src = videoUrl;
-          videoRef.current.play().catch(err => console.error("Error trying to play the video:", err));
-        }
-      }
-    } catch (error) {
-      console.error('Error fetching video sources:', error);
-    }
-  };
 
 
 
