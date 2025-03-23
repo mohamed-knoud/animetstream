@@ -104,7 +104,7 @@ const player = new Plyr('#player');
     setEpisodeNumber(1)
     }
     fetchData();
-  }, []); // Or [] if effect doesn't need props or state
+  }, [animeId]); // Or [] if effect doesn't need props or state
  
   const spinnerTrue = ()=>{
     setSpinner(true)
