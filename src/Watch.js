@@ -1,4 +1,4 @@
-liimport React ,{forwardRef,useState,useEffect,useRef} from 'react'
+import React ,{forwardRef,useState,useEffect,useRef} from 'react'
 import { Link, useParams } from 'react-router-dom';
 import Plyr from 'plyr';
 import axios from 'axios'
