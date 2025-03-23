@@ -1,4 +1,4 @@
-import React ,{forwardRef,useState,useEffect,useRef} from 'react'
+liimport React ,{forwardRef,useState,useEffect,useRef} from 'react'
 import { Link, useParams } from 'react-router-dom';
 import Plyr from 'plyr';
 import axios from 'axios'
@@ -27,7 +27,7 @@ const Watch = forwardRef((props, ref) => {
         'X-Requested-With': 'https://animetstream.vercel.app/'
       },
       data: {
-        url: `https://anime-brown-three.vercel.app/api/v2/hianime/episode/sources?animeEpisodeId=${episodeId}&server=hd-1&category=sub`
+        url: `https://anime-brown-three.vercel.app/api/v2/hianime/episode/sources?animeEpisodeId=${episodeId}&server=hd-1&category=dub`
       }
     }
 const response2 = await axios.request(options);
